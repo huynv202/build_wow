@@ -1,0 +1,39 @@
+{
+  "name": "haven-city",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Haven City - a polished isometric city-builder vertical slice",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huynv202/build_wow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huynv202/build_wow/issues"
+  },
+  "homepage": "https://github.com/huynv202/build_wow#readme",
+  "dependencies": {
+    "@babylonjs/core": "^9.28.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.11.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.1"
+  }
+}
