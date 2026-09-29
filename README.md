@@ -29,12 +29,16 @@ npm run lint
 - Autosave cùng lưu/tải thủ công qua local storage.
 - Camera chiến thuật 3D xoay/pan/zoom và giao diện desktop/mobile.
 - Ánh sáng động, bóng đổ, cửa sổ phát sáng, xe chuyển động, mặt nước và particle mưa.
+- Màn hình title game toàn màn hình sử dụng key art, menu Continue/New City và trạng thái game.
+- Renderer tái sử dụng material, dọn scene theo lifecycle, đóng băng world matrix tĩnh và tự hạ render scale khi FPS thấp.
+- Asset concept từ `00_style` đến `03_services` đã được đăng ký theo từng level và hiển thị trực tiếp trong build/upgrade UI.
 
 ## Kiến trúc
 
 - `src/data`: định nghĩa công trình theo hướng data-driven.
 - `src/game`: mô phỏng thuần và persistence, độc lập với UI.
-- `src/components`: renderer Babylon.js và procedural 3D assets.
+- `src/components`: renderer Babylon.js, cache GLB và tối ưu chất lượng động theo FPS.
+- `scripts/generate-models.mjs`: dựng 105 GLB low-poly từ các concept sheet trong `assets/source-images`.
 - `src/App.tsx`: orchestration gameplay và UI.
 
 State hiện được lưu bằng một object có version key. Khi phát triển multiplayer, simulation có thể chuyển sang authoritative server trong khi client giữ nguyên renderer và command UI. Bước sản phẩm tiếp theo nên là road connectivity/pathfinding, district zoning, backend phòng co-op và test cho simulation.

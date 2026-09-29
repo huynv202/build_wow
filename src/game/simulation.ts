@@ -1,20 +1,27 @@
 import { BUILDING_MAP } from '../data/buildings'
+import { cityLevel, policyUpkeep } from './progression'
 import type { GameState, PlacedBuilding } from '../types'
 
 export const INITIAL_BUILDINGS: PlacedBuilding[] = [
-  { id: 'seed-1', type: 'road', x: 7, y: 7, level: 1, health: 100 }, { id: 'seed-2', type: 'road', x: 8, y: 7, level: 1, health: 100 },
-  { id: 'seed-3', type: 'road', x: 9, y: 7, level: 1, health: 100 }, { id: 'seed-4', type: 'road', x: 10, y: 7, level: 1, health: 100 },
-  { id: 'seed-5', type: 'road', x: 8, y: 8, level: 1, health: 100 }, { id: 'seed-6', type: 'road', x: 8, y: 9, level: 1, health: 100 },
-  { id: 'seed-7', type: 'house', x: 7, y: 8, level: 1, health: 100 }, { id: 'seed-8', type: 'house', x: 9, y: 8, level: 1, health: 100 },
-  { id: 'seed-9', type: 'market', x: 9, y: 6, level: 1, health: 100 }, { id: 'seed-10', type: 'solar', x: 11, y: 7, level: 1, health: 100 },
-  { id: 'seed-11', type: 'water', x: 8, y: 10, level: 1, health: 100 }, { id: 'seed-12', type: 'park', x: 7, y: 6, level: 1, health: 100 },
+  ...Array.from({ length: 5 }, (_, i) => ({ id: `starter-road-h-${i}`, type: 'road', x: 6 + i, y: 8, level: 1, health: 100 })),
+  ...Array.from({ length: 5 }, (_, i) => ({ id: `starter-road-v-${i}`, type: 'road', x: 8, y: 6 + i, level: 1, health: 100 })).filter(road => road.y !== 8),
+  { id: 'starter-house', type: 'house', x: 7, y: 7, level: 1, health: 100 },
+  { id: 'starter-market', type: 'market', x: 9, y: 7, level: 1, health: 100 },
+  { id: 'starter-park', type: 'park', x: 7, y: 9, level: 1, health: 100 },
+  { id: 'starter-solar', type: 'solar', x: 9, y: 9, level: 1, health: 100 },
+  { id: 'starter-water', type: 'water', x: 8, y: 10, level: 1, health: 100 },
 ]
 
-export const initialState = (): GameState => ({
-  buildings: INITIAL_BUILDINGS,
-  stats: { money: 12500, population: 36, happiness: 72, power: 55, powerUse: 11, water: 65, waterUse: 6, level: 1, xp: 35, income: 0 },
-  weather: 'Nắng đẹp', hour: 7.5, day: 1, disaster: null,
-})
+export const initialState = (): GameState => {
+  const state: GameState = {
+    buildings: INITIAL_BUILDINGS,
+    stats: { money: 35000, population: 6, housingCapacity: 0, jobs: 0, unemployment: 0, happiness: 68, power: 0, powerUse: 0, water: 0, waterUse: 0, level: 1, xp: 6, income: 0 },
+    weather: 'Nắng đẹp', hour: 7.5, day: 1, disaster: null,
+    dynamics: { groups: { families: 2, workers: 3, students: 1, elderly: 0, tourists: 0 }, services: { health: 36, education: 34, safety: 38, mobility: 58, resilience: 24, defense: 8 }, pressures: { housing: 45, jobs: 35, affordability: 78, environment: 74 }, momentum: 0 },
+    progress: { claimedMissions: [], activePolicies: [], threatsSurvived: 0, nextThreatDay: 4 },
+  }
+  return { ...state, stats: calculateStats(state) }
+}
 
 export function calculateStats(state: GameState): GameState['stats'] {
   let population = 0, jobs = 0, power = 0, powerUse = 0, water = 0, waterUse = 0, happinessImpact = 0, upkeep = 0
@@ -31,8 +38,25 @@ export function calculateStats(state: GameState): GameState['stats'] {
     upkeep += item.upkeep * scale
   })
   const powered = powerUse <= power, watered = waterUse <= water
-  const employment = population ? Math.min(1, jobs / (population * .55)) : 1
+  const housingCapacity = Math.round(population)
+  const actualPopulation = Math.min(state.stats.population, housingCapacity)
+  const employment = actualPopulation ? Math.min(1, jobs / (actualPopulation * .55)) : 1
   const happiness = Math.round(Math.max(20, Math.min(98, 58 + happinessImpact * .45 + employment * 12 - (!powered ? 18 : 0) - (!watered ? 22 : 0))))
-  const revenue = population * 4.2 + jobs * 2.8
-  return { ...state.stats, population: Math.round(population), happiness, power: Math.round(power), powerUse: Math.round(powerUse), water: Math.round(water), waterUse: Math.round(waterUse), income: Math.round(revenue - upkeep), level: Math.max(1, Math.floor(population / 250) + 1), xp: population % 250 }
+  const revenue = actualPopulation * 7 + Math.min(jobs, actualPopulation * .6) * 5
+  const starterGrant = Math.max(0, 260 - actualPopulation * 5)
+  const level = cityLevel(actualPopulation)
+  return { ...state.stats, population: actualPopulation, housingCapacity, jobs: Math.round(jobs), unemployment: Math.round((1-employment)*100), happiness, power: Math.round(power), powerUse: Math.round(powerUse), water: Math.round(water), waterUse: Math.round(waterUse), income: Math.round(revenue + starterGrant - upkeep - policyUpkeep(state)), level, xp: actualPopulation }
+}
+
+export function budgetBreakdown(state: GameState) {
+  let upkeep = 0
+  state.buildings.forEach((placed) => {
+    const item = BUILDING_MAP[placed.type]
+    upkeep += item.upkeep * (1 + (placed.level - 1) * .45)
+  })
+  const populationTax = state.stats.population * 7
+  const jobTax = Math.min(state.stats.jobs, state.stats.population * .6) * 5
+  const starterGrant = Math.max(0, 260 - state.stats.population * 5)
+  const policies = policyUpkeep(state)
+  return { populationTax, jobTax, starterGrant, upkeep, policies, net: populationTax + jobTax + starterGrant - upkeep - policies }
 }
