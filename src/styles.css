@@ -37,3 +37,15 @@
 /* Living city, preparedness and crisis response */
 .crisis-readiness{display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;padding:10px;border:1px solid #d5dfd6;border-radius:9px;background:linear-gradient(135deg,#e3ece2,#f0ead7)}.crisis-readiness>i{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#234f45;color:#f0c96b;font-style:normal;font-size:17px}.crisis-readiness span strong,.crisis-readiness span small{display:block}.crisis-readiness span strong{font-size:10px}.crisis-readiness span small{margin-top:2px;font-size:8px;color:#607a71}.crisis-readiness>b{grid-column:1/3;padding-top:7px;border-top:1px solid #ccd7cd;font-size:8px;color:#6b7e77}.insight-panel{bottom:96px;overflow:auto}.disaster{width:min(570px,calc(100vw - 44px));padding:10px 14px}.disaster>div{flex:1;min-width:0}.disaster small{display:block;margin-top:2px;font-size:8px;color:rgba(255,255,255,.72)}.disaster>button{position:relative;z-index:1;border:1px solid rgba(255,255,255,.28);border-radius:7px;background:rgba(255,255,255,.12);color:white;padding:8px 10px;font-size:8px;font-weight:700;cursor:pointer;white-space:nowrap}.disaster>button:hover{background:rgba(255,255,255,.2)}.disaster.active{animation:crisisPulse 2.2s ease-in-out infinite}.disaster.recovery{animation:none}@keyframes crisisPulse{50%{box-shadow:0 8px 34px rgba(187,54,39,.5)}}
 @media(max-width:700px){.disaster{display:grid;grid-template-columns:28px 1fr;padding:9px 11px}.disaster>button{grid-column:1/3;margin-top:6px}.insight-panel{bottom:146px}}
+
+/* Build UX: touch confirm bar, service reach info, move/rotate actions */
+.touch-build-bar{position:absolute;z-index:12;left:50%;bottom:150px;transform:translateX(-50%);display:flex;gap:8px}
+.touch-build-bar button{border:0;border-radius:9px;padding:13px 20px;font-size:12px;font-weight:700;background:#1b4b40;color:white;box-shadow:0 8px 22px rgba(20,50,42,.32);cursor:pointer}
+.touch-build-bar button.ghost{background:rgba(246,245,231,.92);color:#7c4a3f}
+.service-reach{margin:8px 0 0;padding:7px 9px;border:1px solid #d5dfd6;border-radius:7px;background:#eef3ea;font-size:10px;color:#5f7a71}
+.service-reach b{color:#205e4d}
+.detail-actions{display:flex;gap:7px;margin-top:12px}
+.detail-actions button{flex:1;border:1px solid #cfdccf;background:rgba(255,255,255,.72);border-radius:7px;padding:9px 6px;font-size:10px;font-weight:700;color:#2c5a4d;cursor:pointer}
+.detail-actions button:hover{background:white}
+.detail-actions kbd{font:inherit;font-size:8px;background:#dfe7dd;border-radius:3px;padding:1px 4px;margin-left:4px}
+@media(max-width:700px){.touch-build-bar{bottom:calc(152px + env(safe-area-inset-bottom))}.detail-panel{padding-bottom:calc(10px + env(safe-area-inset-bottom))}}
