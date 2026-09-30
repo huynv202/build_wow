@@ -1,6 +1,6 @@
 export type Category = 'roads' | 'transport' | 'homes' | 'commerce' | 'services' | 'utilities' | 'nature'
 export type Tool = 'inspect' | 'bulldoze' | string
-export type Overlay = 'none' | 'power' | 'water' | 'happiness' | 'flood'
+export type Overlay = 'none' | 'power' | 'water' | 'happiness' | 'flood' | 'population' | 'medical' | 'safety' | 'protection' | 'traffic'
 export type Weather = 'Nắng đẹp' | 'Có mây' | 'Mưa' | 'Mưa lớn'
 export type PolicyId = 'housing_support' | 'green_priority' | 'transit_priority'
 
@@ -29,7 +29,8 @@ export interface BuildingDefinition {
   description: string
 }
 
-export interface PlacedBuilding { id: string; type: string; x: number; y: number; level: number; health: number }
+export type RotationStep = 0 | 1 | 2 | 3
+export interface PlacedBuilding { id: string; type: string; x: number; y: number; level: number; health: number; rotation?: RotationStep }
 export interface CityStats { money: number; population: number; housingCapacity: number; jobs: number; unemployment: number; happiness: number; power: number; powerUse: number; water: number; waterUse: number; level: number; xp: number; income: number }
 export interface CityDynamics {
   groups: { families: number; workers: number; students: number; elderly: number; tourists: number }

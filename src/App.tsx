@@ -3,10 +3,11 @@ import type { CSSProperties } from 'react'
 import { BUILDINGS, BUILDING_MAP } from './data/buildings'
 import { budgetBreakdown, calculateStats, initialState } from './game/simulation'
 import { simulateCity } from './game/citySimulation'
+import { serviceLabel, serviceReach } from './game/services'
 import { applyDisasterDamage, availableThreats, DISASTERS, threatReadiness } from './game/disasters'
 import { activeMission, isUnlocked, levelProgress, missionValue, MISSIONS, POLICIES, unlockLevel } from './game/progression'
 import { hasSave, loadGame, saveGame } from './game/storage'
-import type { Category, DisasterKind, GameState, GridPoint, Notification, Overlay, PlacementPlan, PolicyId, Tool } from './types'
+import type { Category, DisasterKind, GameState, GridPoint, Notification, Overlay, PlacementPlan, PlacedBuilding, PolicyId, RotationStep, Tool } from './types'
 import './styles.css'
 
 const CityCanvas = lazy(() => import('./components/CityCanvas').then(module => ({ default: module.CityCanvas })))
@@ -17,6 +18,12 @@ const categories: { id: Category; label: string; icon: string }[] = [
 ]
 const weatherCycle: GameState['weather'][] = ['Nắng đẹp', 'Có mây', 'Mưa', 'Mưa lớn', 'Có mây']
 const cityTitles = ['Khu định cư mới', 'Thị trấn xanh', 'Đô thị năng động', 'Thành phố đáng sống', 'Trung tâm vùng', 'Siêu đô thị chống chịu']
+const OVERLAY_OPTIONS: Overlay[] = ['none', 'power', 'water', 'happiness', 'flood', 'population', 'medical', 'safety', 'protection', 'traffic']
+const OVERLAY_HINTS: Record<Overlay, string> = {
+  none: 'Chế độ hiển thị tiêu chuẩn', power: 'Nguồn và lưới điện', water: 'Nguồn và lưới nước', happiness: 'Mức độ hài lòng theo khu', flood: 'Ngập lụt, kè biển và thoát nước',
+  population: 'Heatmap mật độ dân số', medical: 'Vùng phủ bệnh viện · phòng khám', safety: 'Vùng phủ cảnh sát · cứu hỏa', protection: 'Vùng bảo vệ UV, an ninh và phòng thủ', traffic: 'Ùn tắc giao thông theo màu',
+}
+const SERVICE_TYPES = new Set(['clinic', 'hospital', 'police', 'fire', 'school', 'university', 'uv_station', 'drain', 'seawall', 'shelter', 'security_hub', 'research_lab', 'defense_tower'])
 
 export default function App() {
   const [started, setStarted] = useState(false)
@@ -32,6 +39,9 @@ export default function App() {
   const [insightsOpen, setInsightsOpen] = useState(false)
   const [missionsOpen, setMissionsOpen] = useState(false)
   const [placementPreview, setPlacementPreview] = useState<PlacementPlan | null>(null)
+  const [rotation, setRotation] = useState<RotationStep>(0)
+  const [moveRequest, setMoveRequest] = useState<{ id: string; nonce: number } | null>(null)
+  const history = useRef<{ past: GameState[]; future: GameState[] }>({ past: [], future: [] })
   const simulationHours = useRef(0)
   const autosaveTicks = useRef(0)
   const lastDay = useRef<number | null>(null)
@@ -128,6 +138,7 @@ export default function App() {
     lastDay.current = state.day
     lastLevel.current = state.stats.level
     simulationHours.current = 0
+    history.current = { past: [], future: [] }
     setGame(state)
     setStarted(true)
   }
@@ -175,6 +186,7 @@ export default function App() {
     if (tool === 'bulldoze') {
       const keys = new Set(plan.valid.map(point => `${point.x}:${point.y}`))
       setGame(previous => {
+        history.current.past.push(previous); if (history.current.past.length > 25) history.current.past.shift(); history.current.future = []
         const next = { ...previous, buildings: previous.buildings.filter(building => !keys.has(`${building.x}:${building.y}`)), stats: { ...previous.stats, money: previous.stats.money + plan.refund } }
         return { ...next, stats: calculateStats(next) }
       })
@@ -185,15 +197,54 @@ export default function App() {
 
     const definition = BUILDING_MAP[tool]
     if (!definition) return
+    const rot = rotation
     setGame(previous => {
-      const additions = plan.valid.map(point => ({ id: crypto.randomUUID(), type: definition.id, x: point.x, y: point.y, level: 1, health: 100 }))
+      history.current.past.push(previous); if (history.current.past.length > 25) history.current.past.shift(); history.current.future = []
+      const additions = plan.valid.map(point => ({ id: crypto.randomUUID(), type: definition.id, x: point.x, y: point.y, level: 1, health: 100, rotation: rot }))
       const next = { ...previous, buildings: [...previous.buildings, ...additions], stats: { ...previous.stats, money: previous.stats.money - plan.cost } }
       return { ...next, stats: calculateStats(next) }
     })
     if (plan.valid.length > 1) notify('Đã hoàn thành xây dựng', `${plan.valid.length} ${definition.name.toLowerCase()} đã được đặt với tổng chi phí ${money(plan.cost)}.`)
   }
 
-  const cancelBuild = () => { setTool('inspect'); setPlacementPreview(null) }
+  // Editor-style undo/redo over player actions only; the sim clock keeps running.
+  const commit = (label: string, mutate: (previous: GameState) => GameState) => setGame(previous => {
+    history.current.past.push(previous); if (history.current.past.length > 25) history.current.past.shift(); history.current.future = []
+    void label
+    return mutate(previous)
+  })
+
+  const undo = () => {
+    const previous = history.current.past.pop()
+    if (!previous) { notify('Không còn thao tác để hoàn tác', 'Undo chỉ áp dụng cho xây, phá, nâng cấp và di dời.', 'high'); return }
+    setGame(current => { history.current.future.push(current); return { ...current, buildings: previous.buildings, stats: { ...current.stats, money: previous.stats.money } } })
+  }
+
+  const redo = () => {
+    const upcoming = history.current.future.pop()
+    if (!upcoming) { notify('Không còn thao tác để làm lại', 'Nhấn Ctrl+Y sau khi hoàn tác để khôi phục.', 'high'); return }
+    setGame(current => { history.current.past.push(current); return { ...current, buildings: upcoming.buildings, stats: { ...current.stats, money: upcoming.stats.money } } })
+  }
+
+  const rotate = () => setRotation(value => ((value + 1) % 4) as RotationStep)
+
+  const moveBuilding = (id: string, target: GridPoint): boolean => {
+    const building = game.buildings.find(item => item.id === id)
+    if (!building) return false
+    if (game.buildings.some(other => other.id !== id && other.x === target.x && other.y === target.y)) { notify('Ô đất đang bận', 'Chọn một ô trống cạnh đường để dời công trình.', 'high'); return false }
+    const roads = new Set(game.buildings.filter(item => item.type === 'road').map(item => `${item.x}:${item.y}`))
+    if (building.type !== 'road' && roads.size && !adjacentTo(target, roads)) { notify('Ngoài phạm vi kết nối', 'Công trình cần nằm cạnh một ô đường.', 'high'); return false }
+    commit('move', previous => ({ ...previous, buildings: previous.buildings.map(item => item.id === id ? { ...item, x: target.x, y: target.y } : item) }))
+    notify('Đã di dời công trình', `${BUILDING_MAP[building.type]?.name ?? 'Công trình'} vừa được chuyển tới ô (${target.x + 1}, ${target.y + 1}).`)
+    return true
+  }
+
+  const rotateSelected = () => {
+    if (!selectedBuilding) return
+    commit('rotate', previous => ({ ...previous, buildings: previous.buildings.map(item => item.id === selectedBuilding.id ? { ...item, rotation: (((item.rotation ?? 0) + 1) % 4) as RotationStep } : item) }))
+  }
+
+  const cancelBuild = () => { setTool('inspect'); setPlacementPreview(null); setRotation(0) }
 
   const upgrade = () => {
     if (!selectedBuilding || !selectedDef) return
@@ -201,7 +252,7 @@ export default function App() {
     if (selectedBuilding.level >= max) { notify('Đã đạt cấp tối đa', `${selectedDef.name} đã phát triển hoàn chỉnh.`); return }
     const cost = Math.round(selectedDef.cost * (.65 + selectedBuilding.level * .35))
     if (game.stats.money < cost) { notify('Ngân sách không đủ', `Nâng cấp cần ${money(cost)}.`, 'high'); return }
-    setGame(previous => {
+    commit('upgrade', previous => {
       const next = { ...previous, buildings: previous.buildings.map(building => building.id === selectedBuilding.id ? { ...building, level: building.level + 1 } : building), stats: { ...previous.stats, money: previous.stats.money - cost } }
       return { ...next, stats: calculateStats(next) }
     })
@@ -211,7 +262,7 @@ export default function App() {
     if (!selectedBuilding || !selectedDef || selectedBuilding.health >= 100) return
     const cost = repairCost(selectedDef.cost, selectedBuilding.health)
     if (game.stats.money < cost) { notify('Ngân sách không đủ', `Sửa chữa cần ${money(cost)}.`, 'high'); return }
-    setGame(previous => {
+    commit('repair', previous => {
       const next = { ...previous, buildings: previous.buildings.map(building => building.id === selectedBuilding.id ? { ...building, health: 100 } : building), stats: { ...previous.stats, money: previous.stats.money - cost } }
       return { ...next, stats: calculateStats(next) }
     })
@@ -261,21 +312,21 @@ export default function App() {
     <header className="topbar"><div className="mini-brand"><i>H</i><span>HAVEN</span></div><div className="city-name"><span>THÀNH PHỐ</span><strong>New Haven</strong></div><div className="metrics">
       <Metric icon="₫" value={money(game.stats.money)} label={`${game.stats.income >= 0 ? '+' : ''}${money(game.stats.income)}/ngày`} good={game.stats.income >= 0}/><Metric icon="♟" value={game.stats.population.toLocaleString('vi-VN')} label={`${game.stats.housingCapacity} chỗ ở · ${populationPulse(game)}`}/><Metric icon="♥" value={`${game.stats.happiness}%`} label={`Thất nghiệp ${game.stats.unemployment}%`} good={game.stats.happiness > 65}/><Metric icon="ϟ" value={`${game.stats.powerUse}/${game.stats.power}`} label="Điện MW" good={game.stats.powerUse <= game.stats.power}/><Metric icon="●" value={`${game.stats.waterUse}/${game.stats.water}`} label="Nước ML" good={game.stats.waterUse <= game.stats.water}/>
     </div><div className="clock"><span>NGÀY {game.day}</span><strong>{String(Math.floor(game.hour)).padStart(2, '0')}:{String(Math.floor((game.hour % 1) * 60)).padStart(2, '0')}</strong><small>{game.weather}</small></div><div className="speed">{[0, 1, 2, 4].map(value => <button className={speed === value ? 'active' : ''} onClick={() => setSpeed(value)} key={value}>{value === 0 ? 'Ⅱ' : `${value}×`}</button>)}</div></header>
-    <Suspense fallback={<div className="engine-loading"><i/><span>Đang khởi động thế giới 3D</span></div>}><CityCanvas state={game} tool={tool} overlay={overlay} selected={selected} planPlacement={planPlacement} onPlace={place} onPreview={setPlacementPreview} onCancel={cancelBuild} onSelect={setSelected}/></Suspense>
+    <Suspense fallback={<div className="engine-loading"><i/><span>Đang khởi động thế giới 3D</span></div>}><CityCanvas state={game} tool={tool} overlay={overlay} rotation={rotation} selected={selected} planPlacement={planPlacement} onPlace={place} onPreview={setPlacementPreview} onCancel={cancelBuild} onSelect={setSelected} onRotate={rotate} onMoveBuilding={moveBuilding} moveRequest={moveRequest} onUndo={undo} onRedo={redo}/></Suspense>
 
     {tool !== 'inspect' && <div className={`build-command ${placementPreview && (!placementPreview.affordable || !placementPreview.valid.length) ? 'invalid' : ''}`}><i style={{ background: tool === 'bulldoze' ? '#a94739' : BUILDING_MAP[tool]?.color }}>{tool === 'bulldoze' ? '♜' : BUILDING_MAP[tool]?.icon}</i><div><span>{tool === 'bulldoze' ? 'CHẾ ĐỘ PHÁ DỠ' : 'ĐANG XÂY DỰNG'}</span><strong>{tool === 'bulldoze' ? 'Chọn vùng cần dỡ bỏ' : BUILDING_MAP[tool]?.name}</strong><small>{placementPreview?.message ?? (tool === 'road' ? 'Giữ chuột và kéo để tạo một đoạn đường thẳng' : 'Bấm một ô hoặc giữ chuột và kéo để chọn vùng')}</small></div><em>{placementPreview && placementPreview.valid.length > 0 ? tool === 'bulldoze' ? `+${money(placementPreview.refund)}` : money(placementPreview.cost) : tool === 'bulldoze' ? 'KÉO CHỌN VÙNG' : 'BẤM HOẶC KÉO'}</em><button onClick={cancelBuild}>Hủy <kbd>Esc</kbd></button></div>}
 
     <button className="level-card" onClick={() => setMissionsOpen(true)}><div className="level-ring">{levelInfo.level}</div><div><span>{cityTitles[levelInfo.level - 1] ?? 'Thành phố tương lai'}</span><strong>Cấp {levelInfo.level}</strong><div className="progress"><i style={{ width: `${levelInfo.percent}%` }}/></div><small>{levelInfo.current} / {levelInfo.required} cư dân tới cấp sau</small></div></button>
     {mission && <button className={`mission-tracker ${missionCurrent >= mission.target ? 'ready' : ''}`} onClick={() => setMissionsOpen(true)}><i>{missionCurrent >= mission.target ? '✓' : '◆'}</i><span><small>NHIỆM VỤ HIỆN TẠI</small><strong>{mission.title}</strong><em>{missionCurrent} / {mission.target} {mission.unit}</em></span><b>{money(mission.reward)}</b></button>}
 
-    <div className="overlay-bar"><span>LỚP THÔNG TIN</span>{(['none', 'power', 'water', 'happiness', 'flood'] as Overlay[]).map(value => <button key={value} className={overlay === value ? 'active' : ''} onClick={() => setOverlay(value)}>{({ none: '◉ Bình thường', power: 'ϟ Điện', water: '● Nước', happiness: '♥ Hạnh phúc', flood: '≋ Rủi ro' })[value]}</button>)}<select value={scenario} onChange={event => setScenario(event.target.value as DisasterKind)}>{Object.entries(DISASTERS).map(([kind, item]) => <option key={kind} value={kind}>{item.icon} {item.name}</option>)}</select><button className="disaster-btn" onClick={triggerDisaster}>⚠ Diễn tập · {scenarioReadiness.score}%</button></div>
+    <div className="overlay-bar"><span>LỚP THÔNG TIN</span>{OVERLAY_OPTIONS.map(value => <button key={value} className={overlay === value ? 'active' : ''} onClick={() => setOverlay(value)} title={OVERLAY_HINTS[value]}>{({ none: '◉ Bình thường', power: 'ϟ Điện', water: '● Nước', happiness: '♥ Hạnh phúc', flood: '≋ Rủi ro', population: '♟ Dân số', medical: '✚ Y tế', safety: '⛨ An ninh', protection: '⛨ Vùng phủ', traffic: '⌁ Giao thông' } as Record<Overlay, string>)[value]}</button>)}<select value={scenario} onChange={event => setScenario(event.target.value as DisasterKind)}>{Object.entries(DISASTERS).map(([kind, item]) => <option key={kind} value={kind}>{item.icon} {item.name}</option>)}</select><button className="disaster-btn" onClick={triggerDisaster}>⚠ Diễn tập · {scenarioReadiness.score}%</button></div>
 
     {buildOpen && <aside className="build-panel"><div className="panel-title"><div><span>QUY HOẠCH</span><h2>Xây dựng</h2></div><button onClick={() => setBuildOpen(false)}>×</button></div><div className="build-guidance"><i>↔</i><span><strong>Kéo công trình ra bản đồ</strong>Hoặc chọn rồi kéo trên đất để xây đường và quét cả vùng.</span></div><div className="category-list">{categories.map(item => <button key={item.id} className={category === item.id ? 'active' : ''} onClick={() => setCategory(item.id)}><i>{item.icon}</i>{item.label}</button>)}</div><div className="building-list">{available.map(item => {
       const unlocked = isUnlocked(item.id, game.stats.level)
       return <button key={item.id} draggable={unlocked} disabled={!unlocked} className={`${tool === item.id ? 'active' : ''} ${!unlocked ? 'locked' : ''}`} onDragStart={event => { event.dataTransfer.setData('text/plain', item.id); event.dataTransfer.effectAllowed = 'copy'; setTool(item.id); setSelected(null); setPlacementPreview(null) }} onClick={() => { if (unlocked) { setTool(item.id); setSelected(null); setPlacementPreview(null) } }}>{item.assetPath ? <img src={assetImage(item.assetPath, 1)} alt=""/> : <i style={{ background: item.color }}>{item.icon}</i>}<span><strong>{item.name}</strong><small>{unlocked ? `${money(item.cost)} · −${money(item.upkeep)}/ngày` : `Mở khóa ở cấp ${unlockLevel(item.id)}`}</small></span><b>{unlocked ? tool === item.id ? '✓' : '+' : '◆'}</b></button>
     })}</div></aside>}
 
-    {selectedBuilding && selectedDef && <aside className="detail-panel"><button className="close" onClick={() => setSelected(null)}>×</button><div className="detail-art" style={{ '--accent': selectedDef.color } as CSSProperties}>{selectedDef.assetPath ? <img src={assetImage(selectedDef.assetPath, selectedBuilding.level)} alt={selectedDef.name}/> : <i>{selectedDef.icon}</i>}<span>CẤP {selectedBuilding.level} / {selectedDef.maxLevel ?? 4}</span></div><p className="eyebrow">{categories.find(item => item.id === selectedDef.category)?.label}</p><h2>{selectedDef.levelNames?.[selectedBuilding.level - 1] ?? selectedDef.name}</h2><p>{selectedDef.description}</p><div className="health"><span>Tình trạng</span><b>{selectedBuilding.health}%</b><i><em style={{ width: `${selectedBuilding.health}%` }}/></i></div><div className="detail-grid"><span>Vận hành<b>−{money(Math.round(selectedDef.upkeep * (1 + (selectedBuilding.level - 1) * .45)))}</b></span><span>Hạnh phúc<b>+{selectedDef.happiness ?? 0}</b></span><span>Điện<b>{selectedDef.power ?? 0} MW</b></span><span>Nước<b>{selectedDef.water ?? 0} ML</b></span></div>{selectedBuilding.health < 100 && <button className="repair" onClick={repair}>Sửa chữa công trình <b>{money(repairCost(selectedDef.cost, selectedBuilding.health))}</b></button>}<button className="upgrade" disabled={selectedBuilding.level >= (selectedDef.maxLevel ?? 4)} onClick={upgrade}>{selectedBuilding.level >= (selectedDef.maxLevel ?? 4) ? 'Đã đạt cấp tối đa' : `Nâng lên cấp ${selectedBuilding.level + 1}`}<b>{selectedBuilding.level < (selectedDef.maxLevel ?? 4) && money(Math.round(selectedDef.cost * (.65 + selectedBuilding.level * .35)))}</b></button></aside>}
+    {selectedBuilding && selectedDef && <aside className="detail-panel"><button className="close" onClick={() => setSelected(null)}>×</button><div className="detail-art" style={{ '--accent': selectedDef.color } as CSSProperties}>{selectedDef.assetPath ? <img src={assetImage(selectedDef.assetPath, selectedBuilding.level)} alt={selectedDef.name}/> : <i>{selectedDef.icon}</i>}<span>CẤP {selectedBuilding.level} / {selectedDef.maxLevel ?? 4}</span></div><p className="eyebrow">{categories.find(item => item.id === selectedDef.category)?.label}</p><h2>{selectedDef.levelNames?.[selectedBuilding.level - 1] ?? selectedDef.name}</h2><p>{selectedDef.description}</p>{SERVICE_TYPES.has(selectedBuilding.type) && <p className="service-reach">Bán kính phục vụ hiện tại: <b>{Math.round(serviceReach(selectedBuilding.type, selectedBuilding.level) * 10) / 10} ô</b> · {serviceLabel(selectedBuilding.type)}</p>}<div className="health"><span>Tình trạng</span><b>{selectedBuilding.health}%</b><i><em style={{ width: `${selectedBuilding.health}%` }}/></i></div><div className="detail-grid"><span>Vận hành<b>−{money(Math.round(selectedDef.upkeep * (1 + (selectedBuilding.level - 1) * .45)))}</b></span><span>Hạnh phúc<b>+{selectedDef.happiness ?? 0}</b></span><span>Điện<b>{selectedDef.power ?? 0} MW</b></span><span>Nước<b>{selectedDef.water ?? 0} ML</b></span></div><div className="detail-actions">{selectedBuilding.type !== 'road' && <button className="rotate" onClick={rotateSelected}>Xoay mặt tiền <kbd>R</kbd></button>}{selectedBuilding.type !== 'road' && <button className="move" onClick={() => { setMoveRequest({ id: selectedBuilding.id, nonce: Date.now() }); notify('Chế độ di dời', `Chạm một ô đất trống cạnh đường để dời ${selectedDef.name}. Nhấn Esc để hủy.`, 'low') }}>Di dời công trình</button></div>{selectedBuilding.health < 100 && <button className="repair" onClick={repair}>Sửa chữa công trình <b>{money(repairCost(selectedDef.cost, selectedBuilding.health))}</b></button>}<button className="upgrade" disabled={selectedBuilding.level >= (selectedDef.maxLevel ?? 4)} onClick={upgrade}>{selectedBuilding.level >= (selectedDef.maxLevel ?? 4) ? 'Đã đạt cấp tối đa' : `Nâng lên cấp ${selectedBuilding.level + 1}`}<b>{selectedBuilding.level < (selectedDef.maxLevel ?? 4) && money(Math.round(selectedDef.cost * (.65 + selectedBuilding.level * .35)))}</b></button></aside>}
 
     {insightsOpen && !selectedBuilding && <aside className="insight-panel"><button className="close" onClick={() => setInsightsOpen(false)}>×</button><p className="eyebrow">MÔ PHỎNG ĐÔ THỊ</p><h2>Nhịp sống thành phố</h2><div className="citizen-groups"><span>Gia đình<b>{game.dynamics.groups.families}</b></span><span>Lao động<b>{game.dynamics.groups.workers}</b></span><span>Học sinh<b>{game.dynamics.groups.students}</b></span><span>Cao tuổi<b>{game.dynamics.groups.elderly}</b></span></div><h3>Dịch vụ thiết yếu</h3><ServiceBar label="Y tế" value={game.dynamics.services.health}/><ServiceBar label="Giáo dục" value={game.dynamics.services.education}/><ServiceBar label="An ninh" value={game.dynamics.services.safety}/><ServiceBar label="Di chuyển" value={game.dynamics.services.mobility}/><ServiceBar label="Chống chịu" value={game.dynamics.services.resilience}/><ServiceBar label="Phòng vệ" value={game.dynamics.services.defense}/><h3>Trung tâm khẩn cấp</h3><div className="crisis-readiness"><i>{DISASTERS[scenario].icon}</i><span><strong>{DISASTERS[scenario].name}</strong><small>{scenarioReadiness.status} · {scenarioReadiness.score}%</small></span><b>Ngày cảnh báo dự kiến: {game.progress.nextThreatDay}</b></div><h3>Ngân sách mỗi ngày</h3><div className="budget-lines"><span>Thuế cư dân <b>+{money(finances.populationTax)}</b></span><span>Thuế việc làm <b>+{money(finances.jobTax)}</b></span>{finances.starterGrant > 0 && <span>Trợ cấp khởi nghiệp <b>+{money(finances.starterGrant)}</b></span>}<span>Vận hành <b>−{money(finances.upkeep + finances.policies)}</b></span><strong>Dòng tiền <b>{finances.net >= 0 ? '+' : ''}{money(finances.net)}</b></strong></div><div className="city-advice"><strong>{cityAdvice(game)}</strong><span>{bottleneckDetail(game)}</span></div></aside>}
 
@@ -285,7 +336,7 @@ export default function App() {
       return <button key={policy.id} className={active ? 'active' : ''} onClick={() => togglePolicy(policy.id, policy.unlockLevel)}><i>{active ? '✓' : unlocked ? '○' : '◆'}</i><span><strong>{policy.name}</strong><small>{unlocked ? policy.description : `Mở khóa ở cấp ${policy.unlockLevel}`}</small></span><b>−{money(policy.upkeep)}/ngày</b></button>
     })}</div></aside>}
 
-    <nav className="dock"><button className={buildOpen ? 'active' : ''} onClick={() => { setBuildOpen(!buildOpen); cancelBuild() }}><i>⌂</i>Xây dựng</button><button className={tool === 'road' ? 'active' : ''} onClick={() => { setBuildOpen(true); setCategory('roads'); setTool('road'); setPlacementPreview(null) }}><i>⌁</i>Đường sá</button><button className={missionsOpen ? 'active' : ''} onClick={() => { setMissionsOpen(!missionsOpen); setSelected(null) }}><i>◆</i>Nhiệm vụ</button><button className={insightsOpen ? 'active' : ''} onClick={() => { setInsightsOpen(!insightsOpen); setSelected(null) }}><i>◔</i>Nhịp sống</button><button className={tool === 'inspect' ? 'active' : ''} onClick={cancelBuild}><i>↖</i>Khảo sát</button><button className={tool === 'bulldoze' ? 'danger active' : ''} onClick={() => { setTool('bulldoze'); setPlacementPreview(null); setSelected(null) }}><i>♜</i>Phá dỡ</button><button onClick={() => { saveGame(game); notify('Đã lưu thành phố', 'Tiến độ của bạn đã được lưu an toàn.') }}><i>▣</i>Lưu game</button></nav>
+    <nav className="dock"><button className={buildOpen ? 'active' : ''} onClick={() => { setBuildOpen(!buildOpen); cancelBuild() }}><i>⌂</i>Xây dựng</button><button className={tool === 'road' ? 'active' : ''} onClick={() => { setBuildOpen(true); setCategory('roads'); setTool('road'); setPlacementPreview(null) }}><i>⌁</i>Đường sá</button><button className={missionsOpen ? 'active' : ''} onClick={() => { setMissionsOpen(!missionsOpen); setSelected(null) }}><i>◆</i>Nhiệm vụ</button><button className={insightsOpen ? 'active' : ''} onClick={() => { setInsightsOpen(!insightsOpen); setSelected(null) }}><i>◔</i>Nhịp sống</button><button className={tool === 'inspect' ? 'active' : ''} onClick={cancelBuild}><i>↖</i>Khảo sát</button><button className={tool === 'bulldoze' ? 'danger active' : ''} onClick={() => { setTool('bulldoze'); setPlacementPreview(null); setSelected(null) }}><i>♜</i>Phá dỡ</button><button onClick={undo} title="Hoàn tác thao tác xây dựng gần nhất (Ctrl+Z)"><i>↺</i>Hoàn tác</button><button onClick={redo} title="Làm lại thao tác đã hoàn tác (Ctrl+Y)"><i>↻</i>Làm lại</button><button onClick={() => { saveGame(game); notify('Đã lưu thành phố', 'Tiến độ của bạn đã được lưu an toàn.') }}><i>▣</i>Lưu game</button></nav>
     {game.disaster && <div className={`disaster ${game.disaster.phase}`}><i>{DISASTERS[game.disaster.kind].icon}</i><div><span>{game.disaster.phase === 'warning' ? 'CẢNH BÁO SỚM' : game.disaster.phase === 'active' ? 'TÌNH TRẠNG KHẨN CẤP' : 'GIAI ĐOẠN PHỤC HỒI'}</span><strong>{game.disaster.phase === 'recovery' ? 'Thành phố đang phục hồi' : game.disaster.phase === 'active' ? DISASTERS[game.disaster.kind].active : DISASTERS[game.disaster.kind].warning}</strong><small>Sẵn sàng {threatReadiness(game, game.disaster.kind).score}% · ứng phó +{game.disaster.response ?? 0}</small></div>{game.disaster.phase !== 'recovery' && <button onClick={emergencyResponse}>Huy động lực lượng</button>}<em style={{ width: `${Math.min(100, game.disaster.progress / (game.disaster.phase === 'active' ? 45 : game.disaster.phase === 'warning' ? 30 : 25) * 100)}%` }}/></div>}
     {toast && <div className={`toast ${toast.priority}`}><i>{toast.priority === 'critical' ? '⚠' : '✦'}</i><div><strong>{toast.title}</strong><span>{toast.body}</span></div><button onClick={() => setToast(null)}>×</button></div>}
   </div>
