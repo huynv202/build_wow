@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "models:generate": "node scripts/generate-models.mjs"
+    "models:generate": "node scripts/generate-models.mjs",
+    "models:audit": "node scripts/audit-models.mjs"
   },
   "repository": {
     "type": "git",
