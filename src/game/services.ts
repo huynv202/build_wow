@@ -34,7 +34,12 @@ export function serviceOverlays(state: GameState): ServiceCoverage[] {
     list.push(building)
     groups.set(building.type, list)
   })
-  return [...groups.entries()].map(([type, buildings]) => ({ ...SERVICE_RADII[type], buildings }))
+  return [...groups.entries()].map(([type, buildings]) => ({
+    radius: SERVICE_RADII[type].tiles,
+    color: SERVICE_RADII[type].color,
+    label: SERVICE_RADII[type].label,
+    buildings,
+  }))
 }
 
 export function coverageAt(point: GridPoint, state: GameState, kind: keyof typeof SERVICE_RADII | 'medical' | 'safety'): boolean {

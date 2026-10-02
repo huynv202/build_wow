@@ -18,13 +18,17 @@ const palette = {
   asphalt: 0x394544, rail: 0x505e60, sand: 0xd7c596,
 }
 
-const materials = Object.fromEntries(Object.entries(palette).map(([key, color]) => [key, new THREE.MeshStandardMaterial({
-  name: key,
-  color,
-  roughness: ['glass', 'glassDark', 'water', 'solar'].includes(key) ? .28 : .72,
-  metalness: ['steel', 'solar'].includes(key) ? .25 : .02,
-  side: ['coral', 'terracotta'].includes(key) ? THREE.DoubleSide : THREE.FrontSide,
-})]))
+const materials = {
+  rough: new THREE.MeshStandardMaterial({ name: 'surface_rough', color: 0xffffff, vertexColors: true, roughness: .74, metalness: .02 }),
+  glossy: new THREE.MeshStandardMaterial({ name: 'surface_glossy', color: 0xffffff, vertexColors: true, roughness: .28, metalness: .04 }),
+  metallic: new THREE.MeshStandardMaterial({ name: 'surface_metallic', color: 0xffffff, vertexColors: true, roughness: .38, metalness: .28 }),
+}
+
+function materialClass(kind) {
+  if (['glass', 'glassDark', 'water'].includes(kind)) return 'glossy'
+  if (['steel', 'solar', 'rail'].includes(kind)) return 'metallic'
+  return 'rough'
+}
 
 function gableRoof(width, depth, height) {
   const w = width / 2, d = depth / 2
@@ -95,7 +99,22 @@ function modelBuilder() {
   }
   const finish = () => {
     const group = new THREE.Group(); group.name = 'asset'
+    const prepared = [], bounds = new THREE.Box3()
     for (const [kind, geometries] of buckets) {
+      const merged = mergeGeometries(geometries, false); merged.computeVertexNormals(); merged.computeBoundingBox()
+      if (merged.boundingBox) bounds.union(merged.boundingBox)
+      prepared.push({ kind, geometry: merged })
+    }
+    const centerX = (bounds.min.x + bounds.max.x) / 2, centerZ = (bounds.min.z + bounds.max.z) / 2
+    const renderBuckets = new Map()
+    for (const { kind, geometry } of prepared) {
+      geometry.translate(-centerX, -bounds.min.y, -centerZ)
+      const color = new THREE.Color(palette[kind]), count = geometry.getAttribute('position').count, values = new Uint8Array(count * 3)
+      for (let index = 0; index < count; index++) { values[index * 3] = Math.round(color.r * 255); values[index * 3 + 1] = Math.round(color.g * 255); values[index * 3 + 2] = Math.round(color.b * 255) }
+      geometry.setAttribute('color', new THREE.Uint8BufferAttribute(values, 3, true))
+      const bucket = materialClass(kind), list = renderBuckets.get(bucket) ?? []; list.push(geometry); renderBuckets.set(bucket, list)
+    }
+    for (const [kind, geometries] of renderBuckets) {
       const merged = mergeGeometries(geometries, false); merged.computeVertexNormals()
       const mesh = new THREE.Mesh(merged, materials[kind]); mesh.name = kind; mesh.castShadow = true; mesh.receiveShadow = true; group.add(mesh)
     }
@@ -417,10 +436,164 @@ function createTreeAsset(kind) {
   return b.finish()
 }
 
+function createPark(level) {
+  const b = modelBuilder(); baseLot(b, 9.6, 9.2)
+  b.box('green', [8.9, .16, 8.5], [0, .34, 0])
+  const fountainRadius = level >= 3 ? 1.05 : .82
+  b.cylinder('concrete', fountainRadius + .28, .22, [0, .5, 0], 20)
+  b.cylinder('water', fountainRadius, .12, [0, .64, 0], 20)
+  b.cylinder('white', .15, .72 + level * .12, [0, .96, 0], 10)
+  b.sphere('water', .2 + level * .03, [0, 1.36 + level * .12, 0], 10, 6)
+  for (const rotation of [0, Math.PI / 2]) b.box(level >= 3 ? 'wood' : 'pavement', [8.2, .12, .82], [0, .47, 0], [0, rotation, 0])
+  for (const [x, z] of [[-3.3, -3], [3.25, -3], [-3.25, 3], [3.3, 3]]) b.tree(x, z, level >= 3 ? .76 : .65)
+  for (const [x, z, r] of [[-2.2, -1.9, 0], [2.2, 1.9, Math.PI], [-2.2, 1.9, Math.PI / 2], [2.2, -1.9, -Math.PI / 2]]) {
+    b.box('wood', [1.25, .14, .42], [x, .72, z], [0, r, 0]); b.box('steel', [1.15, .5, .1], [x, .94, z - .18], [0, r, 0])
+  }
+  if (level >= 2) {
+    for (const x of [-2.7, 2.7]) { b.cylinder('wood', .12, 2.35, [x, 1.52, .85], 8); b.beam('wood', [x, 2.68, -.35], [x, 2.68, 2.05], .1) }
+    for (let x = -2.7; x <= 2.7; x += .68) b.beam('coral', [x, 2.73, -.35], [x, 2.73, 2.05], .075)
+    b.box('sand', [2.2, .12, 1.55], [-2.65, .48, -1.6]); b.box('coral', [.32, 1.35, .32], [-2.65, 1.18, -1.6]); b.box('gold', [1.5, .16, .45], [-2.65, 1.78, -1.6])
+  }
+  if (level >= 3) {
+    b.add('water', new THREE.SphereGeometry(1.55, 18, 9), [0, .35, 2.15], [1.45, .11, .88])
+    for (let x = -3.1; x <= 3.1; x += .62) b.box('wood', [.5, .12, 2.65], [x, .61, 2.05], [0, .12 * Math.sin(x), 0])
+    for (const x of [-3.7, 3.7]) b.tree(x, .75, .72)
+  }
+  if (level >= 4) {
+    const pavilionY = 3.25
+    for (const x of [-2.8, 0, 2.8]) for (const z of [-2.8, 0]) b.cylinder('white', .13, pavilionY, [x, pavilionY / 2 + .4, z], 9)
+    for (let i = -3; i <= 3; i++) b.beam(i % 2 ? 'white' : 'gold', [-3.6, pavilionY + .4, i * .55], [3.6, pavilionY + .65 + Math.cos(i) * .25, i * .55], .1)
+    for (const x of [-2.4, 0, 2.4]) b.solarPanel(x, pavilionY + .92, -.25, .62)
+  }
+  return b.finish()
+}
+
+function createDefenseAsset(family, level) {
+  const b = modelBuilder(); baseLot(b, 9.6, 8.9); const tier = 1 + (level - 1) * .18
+  if (family === 'shelter') {
+    b.box('concrete', [8.1, 1.1 * tier, 6.8], [0, .82 * tier, 0]); b.box('green', [7.6, .22, 6.3], [0, 1.48 * tier, 0])
+    b.box('steel', [2.2, 1.45, .18], [0, .9, 3.46]); b.box('gold', [2.5, .18, .82], [0, 1.72, 3.72])
+    for (const x of [-3, 3]) { b.cylinder('steel', .25, 1.35 + level * .3, [x, 2.1, -1.9], 10); b.box('dark', [.8, .2, .8], [x, 2.8 + level * .3, -1.9]) }
+    if (level >= 2) for (const x of [-2.5, 0, 2.5]) b.solarPanel(x, 1.9 + level * .18, -.4, .68)
+    if (level >= 3) { b.box('white', [3.2, 1.5, 2.4], [2.15, 2.2, 1.15]); b.box('teal', [3.45, .2, 2.65], [2.15, 3.05, 1.15]) }
+    if (level >= 4) for (const x of [-3.6, 3.6]) { b.cylinder('steel', .07, 3.7, [x, 2.2, 2.7], 8); b.sphere('gold', .2, [x, 4.08, 2.7], 8, 5) }
+  } else if (family === 'security_hub') {
+    const floors = level + 2, h = floors * .92
+    b.box('concrete', [7.7, h, 6.6], [0, h / 2 + .28, 0]); b.box('blue', [7.95, .24, 6.85], [0, h + .4, 0])
+    b.frontWindows(7.7, 6.6, Array.from({ length: floors }, (_, i) => 1.02 + i * .92), 4, 'glassDark')
+    b.box('glass', [2.2, 1.55, .14], [0, 1.1, 3.37]); b.box('blue', [3.1, .28, 1.1], [0, 2.05, 3.78])
+    b.cylinder('steel', .12, 2.2 + level * .35, [0, h + 1.55, -.75], 8)
+    b.torus('turquoise', .8 + level * .1, .1, [0, h + 2.65 + level * .35, -.75], [Math.PI / 2, 0, 0], 20)
+    if (level >= 3) for (const x of [-2.8, 0, 2.8]) b.solarPanel(x, h + .78, 1.45, .62)
+    if (level >= 4) for (const x of [-3.2, 3.2]) b.sphere('turquoise', .25, [x, h + 1.4, 0], 10, 6)
+  } else if (family === 'research_lab') {
+    const h = 2.2 + level * .65
+    b.cylinder('white', 3.65, h, [0, h / 2 + .28, 0], 16, 3.25)
+    b.torus('teal', 3.2, .18, [0, h + .34, 0], [Math.PI / 2, 0, 0], 24)
+    b.sphere('glass', 2.45 + level * .14, [0, h + .34, 0], 20, 10, [1, .45, 1])
+    b.box('glassDark', [2.1, 1.45, .12], [0, 1.15, 3.42]); b.box('coral', [2.8, .22, 1.1], [0, 2.02, 3.78])
+    for (const angle of [0, Math.PI / 2, Math.PI, Math.PI * 1.5]) { const x = Math.cos(angle) * 3.75, z = Math.sin(angle) * 3.75; b.cylinder('steel', .07, 2.1 + level * .3, [x, 1.45 + level * .15, z], 8); b.sphere('turquoise', .2, [x, 2.55 + level * .3, z], 8, 5) }
+    if (level >= 3) for (const x of [-2.2, 0, 2.2]) b.solarPanel(x, h + 1.55, -.5, .58)
+  } else {
+    const towerH = 6.2 + level * 1.4
+    b.cylinder('concrete', 1.45 + level * .08, towerH, [0, towerH / 2 + .28, 0], 12, 1.9)
+    b.box('dark', [4.7, .75 + level * .08, 3.3], [0, towerH + .42, 0]); b.box('teal', [5, .22, 3.6], [0, towerH + .94, 0])
+    for (const x of [-1.55, 1.55]) b.cylinder('steel', .22, 2.4 + level * .3, [x, towerH + 2.05, .2], 10, .1)
+    b.sphere('turquoise', .44, [0, towerH + 1.55, 0], 12, 7)
+    for (const angle of [0, Math.PI / 2, Math.PI, Math.PI * 1.5]) b.beam('steel', [0, towerH + 1.55, 0], [Math.cos(angle) * (2.6 + level * .2), towerH + 1.55, Math.sin(angle) * (2.6 + level * .2)], .08)
+    if (level >= 3) for (const x of [-3.2, 3.2]) b.solarPanel(x, .92, 2.6, .72)
+    if (level >= 4) b.torus('turquoise', 3.8, .1, [0, towerH + 1.55, 0], [Math.PI / 2, 0, 0], 28)
+  }
+  return b.finish()
+}
+
+function createWindTurbine(level) {
+  const b = modelBuilder(); baseLot(b, 8.8, 8.4); const towerH = 6.2 + level * 1.05, rotorY = towerH + .45, radius = 2.2 + level * .24
+  if (level >= 3) {
+    b.cylinder('white', 2.65 + level * .1, 1.05, [0, .78, 0], 18, 2.35)
+    for (const x of [-1.4, 1.4]) b.box('glass', [1.05, .62, .12], [x, .85, 2.5])
+    b.torus('turquoise', 2.25, .12, [0, 1.42, 0], [Math.PI / 2, 0, 0], 24)
+  }
+  b.cylinder('white', .42 + level * .04, towerH, [0, towerH / 2 + .28, 0], 14, .78 + level * .04)
+  b.box('teal', [1.45, .72, .78], [0, rotorY, .05]); b.sphere('steel', .45, [0, rotorY, .48], 12, 7)
+  for (let i = 0; i < 3; i++) {
+    const angle = i * Math.PI * 2 / 3 + (level % 2) * .18
+    const start = [Math.cos(angle) * .35, rotorY + Math.sin(angle) * .35, .52]
+    const end = [Math.cos(angle) * radius, rotorY + Math.sin(angle) * radius, .52]
+    b.beam('white', start, end, .16, 8)
+    b.box('coral', [.22, .32, .16], end, [0, 0, angle])
+  }
+  if (level >= 2) b.box('white', [2.8, 1.5, 2.2], [2.4, 1.03, -2.35])
+  if (level >= 3) for (const x of [-2.8, 0, 2.8]) b.solarPanel(x, 1.72, 2.6, .6)
+  return b.finish()
+}
+
+function createLandmark(family, level) {
+  const b = modelBuilder(); baseLot(b, 9.8, 9.2)
+  if (family === 'civic_tower') {
+    const h = 8 + level * 2.7, width = 4.4 - level * .18
+    b.box('glassDark', [width, h, 4.1], [0, h / 2 + .28, 0]); b.box('white', [width + .55, .28, 4.65], [0, .5, 0])
+    for (const x of [-width / 2 - .08, width / 2 + .08]) b.beam('white', [x, .5, 2], [x * .62, h + .35, 2], .14)
+    for (const y of [2.2, 4.8, 7.4, 10, 12.6, 15.2].filter(value => value < h)) { b.box(y % 5 < 1 ? 'coral' : 'teal', [width + .4, .25, 4.5], [0, y, 0]); b.box('green', [width * .7, .18, .7], [0, y + .2, 1.72]) }
+    b.torus('gold', width * .62, .12, [0, h + .65, 0], [Math.PI / 2, 0, 0], 24)
+    if (level >= 4) b.sphere('turquoise', .65, [0, h + 1.55, 0], 14, 8)
+  } else if (family === 'airport_terminal') {
+    const wings = level >= 3 ? 3 : 2, terminalH = 2.4 + level * .42
+    b.box('white', [8.6, terminalH, 3.4], [0, terminalH / 2 + .28, .8]); b.box('glass', [7.45, 1.45, .14], [0, 1.3, 2.53])
+    archedCanopy(b, 8.9, 4.2, terminalH + .15, .8, level >= 4 ? 'solar' : 'white')
+    for (let i = 0; i < wings; i++) { const x = (i - (wings - 1) / 2) * 3.25; b.box('concrete', [2.45, .35, 4.65], [x, .52, -2.35]); b.box('glassDark', [1.4, .35, 3.9], [x, .75, -2.35]) }
+    b.box('teal', [1.3, 1.2 + level * .22, 1.1], [3.35, terminalH + .85, .75]); b.box('glass', [.82, .58, .82], [3.35, terminalH + 1.38 + level * .22, .75])
+    if (level >= 3) for (const x of [-2.8, 0, 2.8]) b.solarPanel(x, terminalH + 1.15, .55, .58)
+  } else if (family === 'ferris_wheel') {
+    const radius = 2.7 + level * .38, centerY = radius + 1.15
+    b.torus('white', radius, .12 + level * .015, [0, centerY, 0], [0, 0, 0], 36)
+    b.torus('teal', radius * .78, .07, [0, centerY, 0], [0, 0, 0], 32)
+    for (let i = 0; i < 12 + level * 2; i++) { const angle = i * Math.PI * 2 / (12 + level * 2), x = Math.cos(angle) * radius, y = centerY + Math.sin(angle) * radius; b.beam('steel', [0, centerY, 0], [x, y, 0], .035); b.box(i % 2 ? 'turquoise' : 'coral', [.42, .48, .5], [x, y, 0]) }
+    b.sphere('gold', .42, [0, centerY, 0], 12, 7)
+    for (const side of [-1, 1]) { b.beam('coral', [side * 2.5, .42, 0], [0, centerY, 0], .18); b.beam('coral', [side * 1.3, .42, 0], [0, centerY, 0], .12) }
+    b.box('white', [6.7, .75, 2.1], [0, .72, 0]); b.box('glass', [3.2, .68, .14], [0, .82, 1.08])
+  } else {
+    const radius = 3.65 + level * .18, bowlY = 1.35 + level * .18
+    b.add('white', new THREE.TorusGeometry(radius, .75 + level * .08, 8, 28), [0, bowlY, 0], [1.15, 1, 1], [Math.PI / 2, 0, 0])
+    b.add('coral', new THREE.TorusGeometry(radius - .58, .38, 7, 28), [0, bowlY + .22, 0], [1.15, 1, 1], [Math.PI / 2, 0, 0])
+    b.box('green', [5.4, .12, 3.1], [0, .58, 0]); b.box('white', [1.1, .08, 3], [0, .66, 0])
+    for (const x of [-4.15, 4.15]) for (const z of [-2.8, 2.8]) { b.cylinder('steel', .09, 3.4 + level * .5, [x, 2.05 + level * .25, z], 8); b.box('gold', [.58, .38, .58], [x, 3.8 + level * .5, z]) }
+    if (level >= 3) for (let i = -3; i <= 3; i++) b.beam(level >= 4 ? 'turquoise' : 'white', [-4.6, 3.6 + level * .3, i * .72], [4.6, 3.6 + level * .3 + Math.cos(i) * .75, i * .72], .1)
+  }
+  return b.finish()
+}
+
+function createStreetProp(kind) {
+  const b = modelBuilder()
+  if (kind === 'bench') { b.box('wood', [1.65, .16, .48], [0, .65, 0]); b.box('wood', [1.65, .65, .12], [0, .92, -.2]); for (const x of [-.65, .65]) b.box('steel', [.09, .62, .09], [x, .34, 0]) }
+  if (kind === 'street_light') { b.cylinder('dark', .065, 2.8, [0, 1.4, 0], 8); b.sphere('gold', .24, [0, 2.86, 0], 10, 6) }
+  if (kind === 'traffic_light') { b.cylinder('dark', .07, 2.7, [0, 1.35, 0], 8); b.box('dark', [.38, .95, .32], [0, 2.35, 0]); for (const [y, color] of [[2.65, 'red'], [2.36, 'gold'], [2.08, 'green']]) b.sphere(color, .1, [0, y, .18], 8, 5) }
+  if (kind === 'bin') { b.cylinder('teal', .34, .92, [0, .48, 0], 12, .29); b.torus('dark', .3, .04, [0, .94, 0], [Math.PI / 2, 0, 0], 14) }
+  if (kind === 'bike_rack') for (const x of [-.65, 0, .65]) b.torus('steel', .42, .055, [x, .43, 0], [0, 0, 0], 12)
+  if (kind === 'hydrant') { b.cylinder('teal', .24, .78, [0, .42, 0], 10, .2); b.sphere('teal', .28, [0, .84, 0], 10, 6); b.cylinder('steel', .1, .48, [0, .58, 0], 8, .1, [0, 0, Math.PI / 2]) }
+  if (kind === 'bollard') { b.cylinder('teal', .12, .72, [0, .36, 0], 10, .1); b.torus('gold', .12, .025, [0, .58, 0], [Math.PI / 2, 0, 0], 10) }
+  if (kind === 'planter') { b.box('wood', [.9, .65, .9], [0, .33, 0]); b.sphere('green', .48, [0, .92, 0], 10, 6, [1.1, .72, 1.1]) }
+  return b.finish()
+}
+
+function createVehicle(kind) {
+  const b = modelBuilder(), bus = kind === 'bus', fire = kind === 'fire_engine', length = bus ? 4.5 : fire ? 3.8 : 2.15, width = bus ? 1.28 : 1.2, bodyH = bus ? 1.25 : .82
+  b.box(fire ? 'red' : bus ? 'white' : 'coral', [width, bodyH, length], [0, .72, 0])
+  b.box('glassDark', [width * .82, bus ? .78 : .48, length * (bus ? .55 : .42)], [0, bus ? 1.18 : 1.05, bus ? -.12 : -.25])
+  for (const x of [-width * .48, width * .48]) for (const z of [-length * .3, length * .3]) b.torus('dark', .25, .09, [x, .35, z], [0, Math.PI / 2, 0], 12)
+  if (bus) { b.box('teal', [width + .03, .2, length], [0, .58, 0]); b.box('coral', [width + .04, .08, length], [0, 1.42, 0]) }
+  if (fire) { b.box('white', [width + .04, .18, length * .8], [0, .72, -.18]); b.box('steel', [.72, .18, length * .72], [0, 1.46, -.2]); b.box('blue', [.58, .16, .35], [0, 1.62, .55]) }
+  if (kind === 'car') b.box('teal', [width + .03, .08, length * .72], [0, 1.34, -.08])
+  return b.finish()
+}
+
+let generatedCount = 0
+
 async function exportGlb(object, output) {
   const scene = new THREE.Scene(); scene.add(object)
   const data = await new Promise((resolve, reject) => new GLTFExporter().parse(scene, resolve, reject, { binary: true, onlyVisible: true }))
   await writeFile(output, Buffer.from(data))
+  generatedCount += 1
 }
 
 const outputDir = new URL('../assets/models/', import.meta.url)
@@ -433,4 +606,10 @@ for (const [family, factory] of Object.entries(utilityFactories)) for (let level
 const transportFactories = { bus_stop: createBusStop, train_station: createTrainStation, bridge: createBridge, metro_station: createMetroStation, marina: createMarina }
 for (const [family, factory] of Object.entries(transportFactories)) for (let level = 1; level <= 4; level++) await exportGlb(factory(level), new URL(`${family}_lv${level}.glb`, outputDir))
 for (const tree of ['young','canopy','columnar','flowering','palm','ornamental']) await exportGlb(createTreeAsset(tree), new URL(`tree_${tree}.glb`, outputDir))
-console.log('Generated 105 optimized GLB models in assets/models')
+for (let level = 1; level <= 4; level++) await exportGlb(createPark(level), new URL(`park_lv${level}.glb`, outputDir))
+for (const family of ['shelter', 'security_hub', 'research_lab', 'defense_tower']) for (let level = 1; level <= 4; level++) await exportGlb(createDefenseAsset(family, level), new URL(`${family}_lv${level}.glb`, outputDir))
+for (let level = 1; level <= 4; level++) await exportGlb(createWindTurbine(level), new URL(`wind_lv${level}.glb`, outputDir))
+for (const family of ['civic_tower', 'airport_terminal', 'ferris_wheel', 'stadium']) for (let level = 1; level <= 4; level++) await exportGlb(createLandmark(family, level), new URL(`${family}_lv${level}.glb`, outputDir))
+for (const prop of ['bench', 'street_light', 'traffic_light', 'bin', 'bike_rack', 'hydrant', 'bollard', 'planter']) await exportGlb(createStreetProp(prop), new URL(`prop_${prop}.glb`, outputDir))
+for (const vehicle of ['car', 'bus', 'fire_engine']) await exportGlb(createVehicle(vehicle), new URL(`vehicle_${vehicle}.glb`, outputDir))
+console.log(`Generated ${generatedCount} optimized GLB models in assets/models`)

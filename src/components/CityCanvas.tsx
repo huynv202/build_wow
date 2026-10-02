@@ -21,9 +21,9 @@ import '@babylonjs/core/Culling/ray'
 import '@babylonjs/loaders/glTF/2.0/glTFLoader'
 import { BUILDING_MAP } from '../data/buildings'
 import { buildRoadNetwork, commuteTrip, findPath, nearestRoadKey, pointAlongTrip, randomTrip, type RoadNetwork, type Trip } from '../game/pathfinding'
-import { serviceOverlays, serviceReach, shortageCauses } from '../game/services'
+import { serviceReach, uncoveredBy } from '../game/services'
 import { instantiatePreparedAsset, prepareAssetContainer } from '../game/graphics/assetPipeline'
-import { isModelBackedBuilding, resolveBuildingAsset, TREE_ASSET_KEYS } from '../game/graphics/assetRegistry'
+import { isModelBackedBuilding, resolveBuildingAsset, resolveSupportAsset, STREET_PROP_ASSET_KEYS, TREE_ASSET_KEYS, type SupportAssetKey } from '../game/graphics/assetRegistry'
 import { configureIsometricPbrLighting } from '../game/graphics/lighting'
 import type { GameState, GridPoint, Overlay, PlacementPlan, RotationStep, Tool } from '../types'
 
@@ -37,6 +37,7 @@ interface BuildInteraction { anchor: GridPoint | null; hover: GridPoint | null; 
 interface Traveler { mesh: Mesh; trip: Trip | null; network: RoadNetwork | null; t: number; speed: number; lane: number; fallback: CarRoute | null }
 interface Commuter { mesh: Mesh; network: RoadNetwork; homeKey: string; workKey: string; trip: Trip | null; t: number; speed: number; phase: 'to-work' | 'to-home'; bob: number }
 interface Runtime { scene: Scene; camera: ArcRotateCamera; ambient: HemisphericLight; sun: DirectionalLight; shadows: ShadowGenerator; cityRoot: TransformNode; previewRoot: TransformNode; rain: ParticleSystem; cars: Mesh[]; travelers: Traveler[]; emergency: Traveler[]; commuters: Commuter[]; citizens: Mesh[]; threats: TransformNode[]; assets: Map<string, AssetContainer>; loading: Set<string>; modelsReady: boolean; modelLoadTimer: number | null; interaction: BuildInteraction; cursorLabel: HTMLElement | null; moveMode: string | null }
+type VehicleAssetKey = 'vehicle_car' | 'vehicle_bus' | 'vehicle_fire_engine'
 
 export function CityCanvas(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null), runtime = useRef<Runtime | null>(null), latest = useRef(props)
@@ -204,7 +205,7 @@ function refreshPlacementPreview(rt: Runtime, props: Props) {
       const definition = BUILDING_MAP[props.tool]
       const profile = resolveBuildingAsset(props.tool, 1)
       const asset = profile ? rt.assets.get(profile.key) : undefined
-      if (asset) {
+      if (asset && profile) {
         // Real GLB preview instead of a ghost box, rotated to the current facing.
         instantiatePreparedAsset(asset, { id: `preview::${key}`, parent: rt.previewRoot, position: new Vector3(world(point.x), .22, world(point.y)), rotation: new Vector3(0, props.rotation * Math.PI / 2, 0), assetScale: profile.scale, collisionEnabled: false, isPickable: false })
         rt.previewRoot.getChildMeshes().forEach(mesh => { mesh.isPickable = false; if (mesh.visibility !== 0) mesh.visibility = .78 })
@@ -301,7 +302,7 @@ function rebuildCity(rt: Runtime, props: Props) {
     if (overlay === 'protection') tileColor = cachedNearest('resp', x, y, responders) <= 5 ? '#49b8a6' : '#c98f5a'
     tile.material = material(scene, `ground-${x}-${y}`, tileColor); tile.receiveShadows = true
     if (!building) { if ((x * 13 + y * 7) % (MOBILE ? 23 : 17) === 0) createTree(scene, cityRoot, tile.position.add(new Vector3(.3, .12, -.25)), shadows, rt.assets); continue }
-    if (building.type === 'road') createRoad(scene, cityRoot, x, y, occupied, tile, props, shadows, lightsOn); else createBuilding(scene, cityRoot, tile, building, props, shadows, lightsOn, rt.assets)
+    if (building.type === 'road') createRoad(scene, cityRoot, x, y, occupied, tile, props, shadows, lightsOn, rt.assets); else createBuilding(scene, cityRoot, tile, building, props, shadows, lightsOn, rt.assets)
     // Warning icons flag residential tiles sitting outside hospital / police coverage.
     if ((overlay === 'none' || overlay === 'medical' || overlay === 'safety') && BUILDING_MAP[building.type]?.population) {
       if (uncoveredBy({ x, y }, props.state, 'medical')) createWarningIcon(scene, cityRoot, tile.position, '#dfb14f', 'outside hospital zone')
@@ -309,8 +310,8 @@ function rebuildCity(rt: Runtime, props: Props) {
     }
   }
   const network = buildRoadNetwork(props.state.buildings)
-  createTraffic(scene, cityRoot, cars, rt.travelers, shadows, night, occupied, network, props.state, overlay)
-  createEmergencyUnits(scene, cityRoot, rt.emergency, shadows, props.state, network, responders)
+  createTraffic(scene, cityRoot, cars, rt.travelers, shadows, night, occupied, network, props.state, overlay, rt.assets)
+  createEmergencyUnits(scene, cityRoot, rt.emergency, shadows, props.state, network, responders, rt.assets)
   createCommuters(scene, cityRoot, rt.commuters, network, props.state)
   createPedestrians(scene, cityRoot, citizens, props.state, occupied)
   if (overlay === 'medical' || overlay === 'safety' || overlay === 'protection') createServiceRings(scene, cityRoot, props.state, overlay)
@@ -377,6 +378,7 @@ function createBuilding(scene: Scene, root: TransformNode, tile: Mesh, placed: G
   else if (placed.type === 'water') { const legs = MeshBuilder.CreateCylinder('tower-leg', { diameter: .32, height: 3.4 }, scene); legs.parent=group; legs.position.y=1.8; legs.material=mat; const tank=MeshBuilder.CreateSphere('water-tank',{diameter:2.35,segments:18},scene);tank.parent=group;tank.scaling.y=.72;tank.position.y=4;tank.material=mat;tank.metadata=group.metadata;shadows.addShadowCaster(tank) }
   else if (placed.type === 'solar') for(let px=-1;px<=1;px++) for(let pz=-1;pz<=1;pz++){const panel=MeshBuilder.CreateBox('solar-panel',{width:.78,height:.08,depth:.65},scene);panel.parent=group;panel.position.set(px*.85,.55,pz*.72);panel.rotation.x=.28;panel.material=material(scene,'solar-glass','#174e69');panel.metadata=group.metadata}
   else if (placed.type === 'drain') { const pump=MeshBuilder.CreateCylinder('pump',{diameter:2.1,height:.7,tessellation:16},scene);pump.parent=group;pump.position.y=.46;pump.material=mat;pump.metadata=group.metadata; const pipe=MeshBuilder.CreateTorus('pipe',{diameter:1.35,thickness:.2,tessellation:20},scene);pipe.parent=group;pipe.position.y=1.1;pipe.rotation.x=Math.PI/2;pipe.material=roofMat;pipe.metadata=group.metadata }
+  else if (['logging_camp', 'farm', 'fishing_dock', 'seafood_factory', 'quarry', 'sawmill', 'workshop', 'warehouse'].includes(placed.type)) createProductionBuilding(scene, group, placed, mat, roofMat, shadows)
   else if (['shelter', 'security_hub', 'research_lab', 'defense_tower'].includes(placed.type)) createDefenseBuilding(scene, group, placed, mat, roofMat, shadows)
   else { const lowRise=['house','market','clinic','fire','school'].includes(placed.type), width=lowRise?2.55:2.15, depth=lowRise?2.35:2.05; const body=MeshBuilder.CreateBox('building-body',{width,depth,height},scene);body.parent=group;body.position.y=height/2+.14;body.material=mat;body.metadata=group.metadata;shadows.addShadowCaster(body); const roof=MeshBuilder.CreateCylinder('building-roof',{diameter:Math.max(width,depth)+.35,height:.35,tessellation:4},scene);roof.parent=group;roof.rotation.y=Math.PI/4;roof.position.y=height+.26;roof.scaling.z=.86;roof.material=roofMat;roof.metadata=group.metadata;shadows.addShadowCaster(roof); const wm=material(scene,`windows-${placed.id}`,lightsOn?'#ffd77d':'#a9dfe3');wm.emissiveColor=lightsOn?new Color3(.72,.44,.12):new Color3(.03,.08,.08); for(let floor=.72;floor<height;floor+=.72){for(const side of [-1,1]){const front=MeshBuilder.CreatePlane('window',{width:width*.46,height:.24},scene);front.parent=group;front.position.set(0,floor,side*(depth/2+.006));front.rotation.y=side<0?Math.PI:0;front.material=wm;front.metadata=group.metadata;const flank=MeshBuilder.CreatePlane('window-side',{width:depth*.42,height:.24},scene);flank.parent=group;flank.position.set(side*(width/2+.006),floor,0);flank.rotation.y=side>0?Math.PI/2:-Math.PI/2;flank.material=wm;flank.metadata=group.metadata}} const band=MeshBuilder.CreateBox('facade-band',{width:width+.05,depth:depth+.05,height:.1},scene);band.parent=group;band.position.y=Math.min(height-.15,.62);band.material=roofMat;band.metadata=group.metadata }
   const collision=MeshBuilder.CreateBox(`${placed.id}::collision`,{width:TILE*.84,depth:TILE*.84,height:Math.max(.5,height)},scene);collision.parent=group;collision.position.y=Math.max(.5,height)/2;collision.visibility=0;collision.isPickable=false;collision.checkCollisions=true;collision.metadata=group.metadata
@@ -385,7 +387,64 @@ function createBuilding(scene: Scene, root: TransformNode, tile: Mesh, placed: G
   if (placed.id === props.selected) { const ring=MeshBuilder.CreateTorus('selection',{diameter:3.3,thickness:.08,tessellation:40},scene);ring.parent=group;ring.position.y=.25;const rm=material(scene,'selection-mat','#ffe178');rm.emissiveColor=new Color3(1,.65,.12);ring.material=rm }
 }
 
-function createRoad(scene: Scene, root: TransformNode, x: number, y: number, occupied: Map<string, GameState['buildings'][number]>, tile: Mesh, props: Props, shadows: ShadowGenerator, lightsOn: boolean) {
+function createProductionBuilding(scene: Scene, group: TransformNode, placed: GameState['buildings'][number], bodyMat: StandardMaterial, accentMat: StandardMaterial, shadows: ShadowGenerator) {
+  const meta = group.metadata, scale = 1 + (placed.level - 1) * .12
+  const addBox = (name: string, width: number, height: number, depth: number, x: number, y: number, z: number, mat = bodyMat) => {
+    const mesh = MeshBuilder.CreateBox(name, { width, height, depth }, scene)
+    mesh.parent = group; mesh.position.set(x, y, z); mesh.material = mat; mesh.metadata = meta; shadows.addShadowCaster(mesh)
+    return mesh
+  }
+  const timber = material(scene, 'production-timber', '#8a5a36'), soil = material(scene, 'production-soil', '#725338'), crop = material(scene, 'production-crop', '#91a950'), water = material(scene, 'production-water', '#3b8fa6')
+
+  if (placed.type === 'logging_camp') {
+    addBox('logging-cabin', 1.55, 1.05 * scale, 1.45, -.48, .65 * scale, -.38)
+    const roof = MeshBuilder.CreateCylinder('logging-roof', { diameter: 1.95, height: 1.65, tessellation: 3 }, scene); roof.parent = group; roof.rotation.z = Math.PI / 2; roof.rotation.x = Math.PI / 2; roof.position.set(-.48, 1.35 * scale, -.38); roof.scaling.y = .72; roof.material = accentMat; roof.metadata = meta; shadows.addShadowCaster(roof)
+    for (let index = 0; index < 5; index++) { const log = MeshBuilder.CreateCylinder('stacked-log', { diameter: .28, height: 1.45, tessellation: 8 }, scene); log.parent = group; log.rotation.z = Math.PI / 2; log.position.set(.55, .28 + (index % 2) * .26, -.78 + Math.floor(index / 2) * .32); log.material = timber; log.metadata = meta; shadows.addShadowCaster(log) }
+    const tree = MeshBuilder.CreateCylinder('logging-tree', { diameterTop: .2, diameterBottom: .32, height: 1.8, tessellation: 7 }, scene); tree.parent = group; tree.position.set(.85, .9, .75); tree.material = timber; tree.metadata = meta
+    const canopy = MeshBuilder.CreatePolyhedron('logging-canopy', { type: 2, size: .72 }, scene); canopy.parent = group; canopy.position.set(.85, 2, .75); canopy.material = material(scene, 'production-canopy', '#557b49'); canopy.metadata = meta; shadows.addShadowCaster(canopy)
+  } else if (placed.type === 'farm') {
+    for (let row = -2; row <= 2; row++) { const bed = addBox('crop-row', 2.5, .12, .26, 0, .16, row * .48, row % 2 ? crop : soil); bed.rotation.y = .06 }
+    addBox('farm-barn', 1.2, 1.05 * scale, 1.05, -.72, .66 * scale, -.62, bodyMat)
+    const silo = MeshBuilder.CreateCylinder('farm-silo', { diameter: .58, height: 1.45 * scale, tessellation: 12 }, scene); silo.parent = group; silo.position.set(.72, .82 * scale, -.72); silo.material = accentMat; silo.metadata = meta; shadows.addShadowCaster(silo)
+  } else if (placed.type === 'fishing_dock') {
+    addBox('dock-deck', 2.7, .18, 1.75, 0, .28, 0, timber)
+    for (const x of [-1.1, 1.1]) for (const z of [-.68, .68]) addBox('dock-pile', .14, .72, .14, x, .05, z, timber)
+    addBox('fish-hut', 1.15, .86 * scale, .95, -.55, .78 * scale, -.2, bodyMat)
+    const roof = MeshBuilder.CreateCylinder('fish-hut-roof', { diameter: 1.45, height: 1.1, tessellation: 3 }, scene); roof.parent = group; roof.rotation.z = Math.PI / 2; roof.rotation.x = Math.PI / 2; roof.position.set(-.55, 1.34 * scale, -.2); roof.material = accentMat; roof.metadata = meta; shadows.addShadowCaster(roof)
+    const boat = addBox('fishing-boat', .72, .22, 1.45, .9, .38, .18, water); boat.rotation.y = -.16
+    addBox('fish-crate', .45, .36, .45, .4, .53, -.55, accentMat)
+  } else if (placed.type === 'seafood_factory') {
+    addBox('seafood-hall', 2.5, 1.3 * scale, 1.85, 0, .78 * scale, 0, bodyMat)
+    addBox('cold-storage-roof', 2.7, .18, 2.05, 0, 1.52 * scale, 0, accentMat)
+    const tankMat = material(scene, 'seafood-tank', '#c8ddd8')
+    for (const x of [-.72, .72]) { const tank = MeshBuilder.CreateCylinder('processing-tank', { diameter: .72, height: 1.15 * scale, tessellation: 12 }, scene); tank.parent = group; tank.position.set(x, .68 * scale, -.28); tank.material = tankMat; tank.metadata = meta; shadows.addShadowCaster(tank) }
+    addBox('cold-room-door', .86, .82, .08, 0, .56, .96, material(scene, 'production-door', '#315b65'))
+    for (let index = 0; index < 3; index++) addBox('seafood-crate', .38, .34, .42, -.52 + index * .52, .24, 1.22, index % 2 ? water : accentMat)
+  } else if (placed.type === 'sawmill') {
+    addBox('sawmill-hall', 2.35, 1.2 * scale, 1.65, 0, .72 * scale, 0, bodyMat)
+    addBox('sawmill-roof', 2.55, .2, 1.88, 0, 1.4 * scale, 0, accentMat).rotation.z = -.08
+    const saw = MeshBuilder.CreateTorus('sawmill-blade', { diameter: .82, thickness: .09, tessellation: 18 }, scene); saw.parent = group; saw.position.set(1.2, .82, .15); saw.rotation.z = Math.PI / 2; saw.material = material(scene, 'production-metal', '#d8d4bd'); saw.metadata = meta; shadows.addShadowCaster(saw)
+    for (let index = 0; index < 4; index++) { const log = MeshBuilder.CreateCylinder('mill-log', { diameter: .24, height: 1.28, tessellation: 8 }, scene); log.parent = group; log.rotation.z = Math.PI / 2; log.position.set(-.45 + (index % 2) * .35, .2 + Math.floor(index / 2) * .22, 1.02); log.material = timber; log.metadata = meta }
+  } else if (placed.type === 'quarry') {
+    const pit = MeshBuilder.CreateCylinder('quarry-pit', { diameterTop: 2.2, diameterBottom: 2.75, height: .3, tessellation: 10 }, scene); pit.parent = group; pit.position.y = .12; pit.material = material(scene, 'quarry-pit', '#554f48'); pit.metadata = meta
+    for (let index = 0; index < 7; index++) { const rock = MeshBuilder.CreatePolyhedron('quarry-rock', { type: 2, size: .36 + (index % 3) * .1 }, scene); const angle = index / 7 * Math.PI * 2; rock.parent = group; rock.position.set(Math.cos(angle) * (index % 2 ? .72 : 1.08), .28 + (index % 2) * .16, Math.sin(angle) * (index % 2 ? .72 : 1.08)); rock.scaling.y = .65 + (index % 3) * .14; rock.material = index % 2 ? bodyMat : accentMat; rock.metadata = meta; shadows.addShadowCaster(rock) }
+    addBox('quarry-loader', 1.05, .42, .58, .62, .48, -.75, material(scene, 'quarry-machine', '#d5a443'))
+    const arm = addBox('quarry-arm', .18, 1.05, .18, .22, .92, -.7, material(scene, 'quarry-machine', '#d5a443')); arm.rotation.z = -.65
+  } else if (placed.type === 'workshop') {
+    addBox('workshop-hall', 2.35, 1.28 * scale, 1.85, 0, .75 * scale, 0, bodyMat)
+    addBox('workshop-roof', 2.55, .18, 2.05, 0, 1.48 * scale, 0, accentMat)
+    const chimney = MeshBuilder.CreateCylinder('workshop-chimney', { diameter: .34, height: 1.55 * scale, tessellation: 8 }, scene); chimney.parent = group; chimney.position.set(.72, 1.72 * scale, -.48); chimney.material = material(scene, 'workshop-chimney', '#4b5452'); chimney.metadata = meta; shadows.addShadowCaster(chimney)
+    for (const side of [-1, 1]) { const gear = MeshBuilder.CreateTorus('workshop-gear', { diameter: .64, thickness: .12, tessellation: 12 }, scene); gear.parent = group; gear.position.set(side * .55, .72, .94); gear.rotation.x = Math.PI / 2; gear.material = material(scene, 'workshop-gear', side > 0 ? '#d3a94e' : '#b9c2b8'); gear.metadata = meta; shadows.addShadowCaster(gear) }
+    addBox('workshop-door', .88, .72, .06, 0, .5, .96, material(scene, 'production-door', '#425b58'))
+  } else {
+    addBox('warehouse-hall', 2.65, 1.35 * scale, 2.15, 0, .78 * scale, 0, bodyMat)
+    addBox('warehouse-roof', 2.8, .18, 2.3, 0, 1.52 * scale, 0, accentMat)
+    const door = addBox('loading-door', 1.05, .78, .08, 0, .55, 1.1, material(scene, 'production-door', '#425b58')); door.metadata = meta
+    for (let index = 0; index < 3; index++) addBox('warehouse-crate', .42, .42, .42, -.82 + index * .48, .28, 1.33, timber)
+  }
+}
+
+function createRoad(scene: Scene, root: TransformNode, x: number, y: number, occupied: Map<string, GameState['buildings'][number]>, tile: Mesh, props: Props, shadows: ShadowGenerator, lightsOn: boolean, assets: Map<string, AssetContainer>) {
   const road=occupied.get(`${x}:${y}`),level=road?.level??1,left=occupied.get(`${x-1}:${y}`)?.type==='road',right=occupied.get(`${x+1}:${y}`)?.type==='road',up=occupied.get(`${x}:${y-1}`)?.type==='road',down=occupied.get(`${x}:${y+1}`)?.type==='road',horizontal=left||right,vertical=up||down,intersection=horizontal&&vertical
   tile.material=material(scene,`asphalt-${level}`,['#4b5755','#414d4c','#344745','#283d40'][level-1])
   if(!intersection){
@@ -393,7 +452,8 @@ function createRoad(scene: Scene, root: TransformNode, x: number, y: number, occ
     for(const side of [-1,1]){const curb=MeshBuilder.CreateBox('road-curb',{width:horizontal?TILE:.13,depth:horizontal?.13:TILE,height:level>=2?.12:.08},scene);curb.parent=root;curb.position.set(tile.position.x+(horizontal?0:side*(TILE/2-.07)),.16,tile.position.z+(horizontal?side*(TILE/2-.07):0));curb.material=material(scene,'curb',level>=3?'#c4cec5':'#a9b8ae')}
     if(level>=3)for(const side of [-1,1]){const lane=MeshBuilder.CreateBox('transit-lane',{width:horizontal?TILE*.92:.055,depth:horizontal?.055:TILE*.92,height:.028},scene);lane.parent=root;lane.position.set(tile.position.x+(horizontal?0:side*.78),.15,tile.position.z+(horizontal?side*.78:0));lane.material=material(scene,'transit-mark',level>=4?'#e85f5a':'#48aaa0')}
   } else if(level>=2){for(let i=-2;i<=2;i++){const stripe=MeshBuilder.CreateBox('crosswalk',{width:.14,depth:.74,height:.03},scene);stripe.parent=root;stripe.position.set(tile.position.x+i*.28,.15,tile.position.z+1.08);stripe.material=material(scene,'crosswalk-mat','#e8ece4');const stripe2=stripe.clone('crosswalk-side');stripe2.position.set(tile.position.x+1.08,.15,tile.position.z+i*.28);stripe2.rotation.y=Math.PI/2}}
-  if((x+y)%2===0)createStreetLight(scene,root,tile.position.add(new Vector3(horizontal?1.25:-1.25,.14,horizontal?-1.25:1.25)),shadows,lightsOn)
+  if((x+y)%2===0)createStreetLight(scene,root,tile.position.add(new Vector3(horizontal?1.25:-1.25,.14,horizontal?-1.25:1.25)),shadows,lightsOn,assets)
+  createRoadsideProps(scene,root,tile.position,x,y,horizontal,intersection,level,occupied,shadows,assets)
   if(level>=4&&(x*7+y*3)%9===0)createRoadGantry(scene,root,tile.position,horizontal,shadows)
   if(props.selected===road?.id){const s=MeshBuilder.CreateBox('road-select',{width:TILE-.15,depth:TILE-.15,height:.04},scene);s.parent=root;s.position.set(tile.position.x,.17,tile.position.z);s.material=material(scene,'road-selection','#ffe178',.45)}
 }
@@ -446,17 +506,65 @@ function createProtectionField(scene:Scene,root:TransformNode,position:Vector3,t
 
 function createPark(scene: Scene, root: TransformNode, shadows: ShadowGenerator, assets: Map<string, AssetContainer>){for(let i=0;i<4;i++)createTree(scene,root,new Vector3((i%2-.5)*1.25,.15,(Math.floor(i/2)-.5)*1.25),shadows,assets)}
 function createTree(scene: Scene, root: TransformNode, position: Vector3, shadows: ShadowGenerator, assets: Map<string, AssetContainer>){const tree=new TransformNode('tree',scene);tree.parent=root;tree.position.copyFrom(position);const index=Math.abs(Math.round(position.x*3+position.z*5))%TREE_ASSET_KEYS.length,asset=assets.get(TREE_ASSET_KEYS[index]);if(asset){instantiatePreparedAsset(asset,{id:`tree-${index}-${position.x.toFixed(1)}-${position.z.toFixed(1)}`,parent:tree,assetScale:.36,collisionEnabled:false,isPickable:false,shadowGenerator:shadows,lod:{detailDistance:42,cullDistance:58}});return}const trunk=MeshBuilder.CreateCylinder('trunk',{diameter:.18,height:.75,tessellation:7},scene);trunk.parent=tree;trunk.position.y=.38;trunk.material=material(scene,'trunk-mat','#74513a');const crown=MeshBuilder.CreatePolyhedron('crown',{type:2,size:.72},scene);crown.parent=tree;crown.position.y=1.12;crown.scaling.y=1.25;crown.material=material(scene,'leaf-mat',(Math.round(position.x+position.z)&1)?'#397d52':'#58a366');shadows.addShadowCaster(crown);rtTrees.push(crown)}
-function createStreetLight(scene:Scene,root:TransformNode,position:Vector3,shadows:ShadowGenerator,lightsOn:boolean){const pole=MeshBuilder.CreateCylinder('street-light',{diameter:.07,height:1.65,tessellation:7},scene);pole.parent=root;pole.position.copyFrom(position);pole.position.y+=.82;pole.material=material(scene,'lamp-pole','#405a56');const lamp=MeshBuilder.CreateSphere('street-lamp',{diameter:.32,segments:8},scene);lamp.parent=root;lamp.position.copyFrom(position);lamp.position.y+=1.68;const lm=material(scene,lightsOn?'lamp-lit':'lamp-off',lightsOn?'#ffe8a2':'#86958d');lm.emissiveColor=lightsOn?new Color3(1,.68,.2):new Color3(0,0,0);lamp.material=lm;if(lightsOn){const pool=MeshBuilder.CreateDisc('street-light-pool',{radius:1.35,tessellation:24},scene);pool.parent=root;pool.position.copyFrom(position);pool.position.y=.17;pool.rotation.x=Math.PI/2;pool.material=material(scene,'lamp-pool','#ffd978',.24);pool.isPickable=false}shadows.addShadowCaster(pole)}
+function createStreetLight(scene: Scene, root: TransformNode, position: Vector3, shadows: ShadowGenerator, lightsOn: boolean, assets: Map<string, AssetContainer>) {
+  const fixture = new TransformNode('street-light', scene)
+  fixture.parent = root; fixture.position.copyFrom(position)
+  const asset = assets.get('prop_street_light'), profile = resolveSupportAsset('prop_street_light')
+  if (asset) instantiatePreparedAsset(asset, { id: `street-light-${position.x}-${position.z}`, parent: fixture, assetScale: profile.scale, collisionEnabled: false, isPickable: false, shadowGenerator: shadows, lod: { detailDistance: profile.detailDistance, cullDistance: profile.cullDistance } })
+  else {
+    const pole = MeshBuilder.CreateCylinder('street-light-pole', { diameter: .07, height: 1.65, tessellation: 7 }, scene)
+    pole.parent = fixture; pole.position.y = .82; pole.material = material(scene, 'lamp-pole', '#405a56'); shadows.addShadowCaster(pole)
+  }
+  const lamp = MeshBuilder.CreateSphere('street-lamp', { diameter: .24, segments: 8 }, scene)
+  lamp.parent = fixture; lamp.position.y = asset ? 1.86 : 1.68
+  const lampMaterial = material(scene, lightsOn ? 'lamp-lit' : 'lamp-off', lightsOn ? '#ffe8a2' : '#86958d')
+  lampMaterial.emissiveColor = lightsOn ? new Color3(1, .68, .2) : new Color3(0, 0, 0); lamp.material = lampMaterial
+  if (lightsOn) {
+    const pool = MeshBuilder.CreateDisc('street-light-pool', { radius: 1.35, tessellation: 24 }, scene)
+    pool.parent = fixture; pool.position.y = .03; pool.rotation.x = Math.PI / 2; pool.material = material(scene, 'lamp-pool', '#ffd978', .24); pool.isPickable = false
+  }
+}
+
+function createRoadsideProps(scene: Scene, root: TransformNode, tilePosition: Vector3, x: number, y: number, horizontal: boolean, intersection: boolean, level: number, occupied: Map<string, GameState['buildings'][number]>, shadows: ShadowGenerator, assets: Map<string, AssetContainer>) {
+  const neighbors = [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]].map(([nx, ny]) => occupied.get(`${nx}:${ny}`)?.type)
+  const side = (x * 7 + y * 11) % 2 ? 1 : -1, along = ((x * 13 + y * 5) % 3 - 1) * .42
+  const position = tilePosition.add(new Vector3(horizontal ? along : side * 1.28, .14, horizontal ? side * 1.28 : along))
+  let key: SupportAssetKey | null = null
+  if (neighbors.includes('park')) key = (x + y) % 2 ? 'prop_bench' : 'prop_planter'
+  else if (neighbors.includes('bus_stop')) key = 'prop_bike_rack'
+  else if (neighbors.includes('fire')) key = 'prop_hydrant'
+  else if (intersection && level >= 3) key = 'prop_bollard'
+  else if ((x * 5 + y * 3 + level) % 5 === 0) key = (x + y) % 2 ? 'prop_bin' : 'prop_planter'
+  if (key) createStreetProp(scene, root, key, position, horizontal ? 0 : Math.PI / 2, shadows, assets)
+  if (intersection && level >= 2) {
+    const signal = tilePosition.add(new Vector3(side * 1.18, .14, ((x + y) % 2 ? 1 : -1) * 1.18))
+    createStreetProp(scene, root, 'prop_traffic_light', signal, horizontal ? 0 : Math.PI / 2, shadows, assets)
+  }
+}
+
+function createStreetProp(scene: Scene, root: TransformNode, key: SupportAssetKey, position: Vector3, rotationY: number, shadows: ShadowGenerator, assets: Map<string, AssetContainer>) {
+  const asset = assets.get(key), profile = resolveSupportAsset(key)
+  if (asset) {
+    instantiatePreparedAsset(asset, { id: `${key}-${position.x}-${position.z}`, parent: root, position, rotation: new Vector3(0, rotationY, 0), assetScale: profile.scale, collisionEnabled: false, isPickable: false, shadowGenerator: shadows, lod: { detailDistance: profile.detailDistance, cullDistance: profile.cullDistance } })
+    return
+  }
+  const isBench = key === 'prop_bench'
+  const fallback = MeshBuilder.CreateBox(key, { width: isBench ? 1 : .28, height: isBench ? .45 : .7, depth: isBench ? .34 : .28 }, scene)
+  fallback.parent = root; fallback.position.copyFrom(position); fallback.position.y += isBench ? .22 : .35; fallback.rotation.y = rotationY
+  fallback.material = material(scene, 'street-prop-fallback', key === 'prop_hydrant' ? '#db5c4d' : '#47706d'); fallback.isPickable = false; shadows.addShadowCaster(fallback)
+}
 function createRoadGantry(scene:Scene,root:TransformNode,position:Vector3,horizontal:boolean,shadows:ShadowGenerator){const gantry=new TransformNode('road-gantry',scene);gantry.parent=root;gantry.position.copyFrom(position);if(!horizontal)gantry.rotation.y=Math.PI/2;for(const x of [-1.18,1.18]){const pole=MeshBuilder.CreateCylinder('gantry-pole',{diameter:.075,height:1.8,tessellation:7},scene);pole.parent=gantry;pole.position.set(x,1.02,0);pole.material=material(scene,'gantry-steel','#4c6666');shadows.addShadowCaster(pole)}const beam=MeshBuilder.CreateBox('gantry-beam',{width:2.55,height:.1,depth:.1},scene);beam.parent=gantry;beam.position.y=1.88;beam.material=material(scene,'gantry-steel','#4c6666');const sensor=MeshBuilder.CreateBox('gantry-sensor',{width:.75,height:.28,depth:.18},scene);sensor.parent=gantry;sensor.position.y=1.72;sensor.material=material(scene,'gantry-display','#54b8bc')}
-function createTraffic(scene: Scene, root: TransformNode, cars: Mesh[], travelers: Traveler[], shadows: ShadowGenerator, night: boolean, occupied: Map<string, GameState['buildings'][number]>, network: RoadNetwork, state: GameState, overlay: Overlay) {
+function createTraffic(scene: Scene, root: TransformNode, cars: Mesh[], travelers: Traveler[], shadows: ShadowGenerator, night: boolean, occupied: Map<string, GameState['buildings'][number]>, network: RoadNetwork, state: GameState, overlay: Overlay, assets: Map<string, AssetContainer>) {
   const roadCount = network.roads.size
   if (!roadCount) return
   // Density follows the simulation: bigger cities see more vehicles on screen.
   const density = Math.min(MOBILE ? 7 : 12, Math.max(2, Math.round(roadCount / 4 + state.stats.population / 45)))
   const congestion = overlay === 'traffic' || state.dynamics.services.mobility < 45
+  const busesEnabled = state.buildings.some(building => building.type === 'bus_stop')
   const colors = ['#e85f4d', '#eab54f', '#e6ede6', '#378294', '#cfd8cf', '#d98a4f']
   for (let i = 0; i < density; i++) {
-    const car = buildVehicleMesh(scene, root, `traveler-${i}`, colors[i % colors.length], shadows, night)
+    const vehicleKey: VehicleAssetKey = busesEnabled && i % 5 === 0 ? 'vehicle_bus' : 'vehicle_car'
+    const car = buildVehicleMesh(scene, root, `traveler-${i}`, colors[i % colors.length], shadows, night, assets, vehicleKey)
     const trip = randomTrip(network, Math.random)
     const fallbackRoute: CarRoute | null = trip ? null : null
     travelers.push({ mesh: car, trip, network, t: Math.random(), speed: (congestion ? .035 : .06) + Math.random() * .03, lane: i % 2 ? .42 : -.42, fallback: fallbackRoute })
@@ -467,20 +575,39 @@ function createTraffic(scene: Scene, root: TransformNode, cars: Mesh[], traveler
   for (let y = 0; y < GRID; y++) { const xs = Array.from({ length: GRID }, (_, x) => x).filter(x => occupied.get(`${x}:${y}`)?.type === 'road'); if (xs.length >= 5) routes.push({ axis: 'x', fixed: world(y) + .42, min: world(Math.min(...xs)) - .8, max: world(Math.max(...xs)) + .8, speed: (congestion ? .9 : 1.8) + routes.length * .18, offset: routes.length * 4.7 }) }
   for (let x = 0; x < GRID; x++) { const ys = Array.from({ length: GRID }, (_, y) => y).filter(y => occupied.get(`${x}:${y}`)?.type === 'road'); if (ys.length >= 5) routes.push({ axis: 'z', fixed: world(x) - .42, min: world(Math.min(...ys)) - .8, max: world(Math.max(...ys)) + .8, speed: (congestion ? .8 : 1.65) + routes.length * .16, offset: routes.length * 5.3 }) }
   routes.slice(0, MOBILE ? 3 : 5).forEach((route, i) => {
-    const car = buildVehicleMesh(scene, root, `car-${i}`, colors[(i + 2) % colors.length], shadows, night)
-    car.metadata = { route }; cars.push(car)
+    const car = buildVehicleMesh(scene, root, `car-${i}`, colors[(i + 2) % colors.length], shadows, night, assets, 'vehicle_car')
+    car.metadata = { ...(car.metadata ?? {}), route }; car.rotation.y = route.axis === 'x' ? Math.PI / 2 : 0; cars.push(car)
   })
 }
 
-function buildVehicleMesh(scene: Scene, root: TransformNode, name: string, color: string, shadows: ShadowGenerator, night: boolean): Mesh {
+function buildVehicleMesh(scene: Scene, root: TransformNode, name: string, color: string, shadows: ShadowGenerator, night: boolean, assets: Map<string, AssetContainer>, assetKey: VehicleAssetKey): Mesh {
+  const asset = assets.get(assetKey), profile = resolveSupportAsset(assetKey)
+  if (asset) {
+    const vehicle = instantiatePreparedAsset(asset, { id: name, name, parent: root, assetScale: profile.scale, collisionEnabled: false, isPickable: false, shadowGenerator: shadows, lod: { detailDistance: profile.detailDistance, cullDistance: profile.cullDistance } })
+    vehicle.position.y = .16; vehicle.metadata = { rideHeight: .16, vehicleKey: assetKey }
+    if (night) createVehicleHeadlights(scene, vehicle, assetKey)
+    return vehicle
+  }
   const car = MeshBuilder.CreateBox(name, { width: .52, height: .3, depth: 1.02 }, scene)
   car.parent = root; car.position.y = .38; car.isPickable = false
+  car.metadata = { rideHeight: .38, vehicleKey: assetKey }
   car.material = material(scene, `vehicle-${name}`, color)
   const cabin = MeshBuilder.CreateBox(`${name}-cabin`, { width: .44, height: .22, depth: .46 }, scene)
   cabin.parent = car; cabin.position.set(0, .24, -.1); cabin.material = material(scene, 'car-window', '#75b9c3')
   shadows.addShadowCaster(car)
-  if (night) { const light = MeshBuilder.CreateSphere('headlight', { diameter: .12 }, scene); light.parent = car; light.position.set(.16, .02, .5); const lm = material(scene, 'headlight-mat', '#fff4b2'); lm.emissiveColor = new Color3(1, .7, .2); light.material = lm }
+  if (night) createVehicleHeadlights(scene,car,assetKey)
   return car
+}
+
+function createVehicleHeadlights(scene: Scene, vehicle: Mesh, assetKey: VehicleAssetKey) {
+  const z = assetKey === 'vehicle_bus' ? .94 : assetKey === 'vehicle_fire_engine' ? .86 : .5
+  const y = assetKey === 'vehicle_bus' ? .42 : assetKey === 'vehicle_fire_engine' ? .46 : .18
+  for (const x of [-.18, .18]) {
+    const light = MeshBuilder.CreateSphere('headlight', { diameter: .1, segments: 7 }, scene)
+    light.parent = vehicle; light.position.set(x, y, z)
+    const lightMaterial = material(scene, 'headlight-mat', '#fff4b2')
+    lightMaterial.emissiveColor = new Color3(1, .7, .2); lightMaterial.disableLighting = true; light.material = lightMaterial
+  }
 }
 
 function placeTraveler(traveler: Traveler) {
@@ -488,7 +615,7 @@ function placeTraveler(traveler: Traveler) {
   const point = pointAlongTrip(traveler.trip, traveler.t)
   if (!point) return
   const lateral = traveler.lane
-  traveler.mesh.position.set(world(point.x) + Math.cos(point.angle) * lateral, .38, world(point.z) - Math.sin(point.angle) * lateral)
+  traveler.mesh.position.set(world(point.x) + Math.cos(point.angle) * lateral, vehicleRideHeight(traveler.mesh), world(point.z) - Math.sin(point.angle) * lateral)
   traveler.mesh.rotation.y = -point.angle
 }
 
@@ -554,7 +681,7 @@ function remapCommuter(commuter: Commuter) {
   commuter.t = 0
 }
 
-function createEmergencyUnits(scene: Scene, root: TransformNode, units: Traveler[], shadows: ShadowGenerator, state: GameState, network: RoadNetwork, responders: GameState['buildings']) {
+function createEmergencyUnits(scene: Scene, root: TransformNode, units: Traveler[], shadows: ShadowGenerator, state: GameState, network: RoadNetwork, responders: GameState['buildings'], assets: Map<string, AssetContainer>) {
   if (!responders.length || network.roads.size < 4) return
   const disaster = state.disaster
   const activeThreat = disaster && (disaster.phase === 'active' || disaster.phase === 'warning')
@@ -562,23 +689,28 @@ function createEmergencyUnits(scene: Scene, root: TransformNode, units: Traveler
   for (let i = 0; i < count; i++) {
     const responder = responders[i % responders.length]
     const isMedical = ['hospital', 'clinic'].includes(responder.type)
-    const body = MeshBuilder.CreateBox(`unit-${responder.type}-${i}`, { width: .62, height: .42, depth: 1.25 }, scene)
-    body.parent = root; body.position.set(world(responder.x), .42, world(responder.y)); body.isPickable = false
-    body.material = material(scene, `unit-mat-${isMedical ? 'med' : 'sec'}`, isMedical ? '#eef4ef' : '#2f5f9e')
-    shadows.addShadowCaster(body)
+    const vehicleKey: VehicleAssetKey = responder.type === 'fire' ? 'vehicle_fire_engine' : 'vehicle_car'
+    const body = buildVehicleMesh(scene, root, `unit-${responder.type}-${i}`, isMedical ? '#eef4ef' : '#2f5f9e', shadows, state.hour < 6 || state.hour > 18.8, assets, vehicleKey)
+    body.position.set(world(responder.x), vehicleRideHeight(body), world(responder.y))
     const beacon = MeshBuilder.CreateSphere(`unit-beacon-${i}`, { diameter: .22, segments: 8 }, scene)
-    beacon.parent = body; beacon.position.set(0, .3, 0)
+    beacon.parent = body; beacon.position.set(0, vehicleKey === 'vehicle_fire_engine' ? .88 : .7, 0)
     const beaconMat = material(scene, `beacon-mat-${isMedical ? 'med' : 'sec'}`, isMedical ? '#ff6b57' : '#4ea8ff', .9)
     beaconMat.emissiveColor = Color3.FromHexString(isMedical ? '#ff6b57' : '#4ea8ff'); beaconMat.disableLighting = true
     beacon.material = beaconMat
     const homeKey = `${responder.x}:${responder.y}`
     const anchor = nearestRoadKey(network, homeKey) ?? [...network.roads][0]
     const target = activeThreat ? threatAnchorKey(state, network) : nearestRoadKey(network, randomDistrictKey(state)) ?? anchor
-    const trip = target && target !== anchor ? findPath(network, anchor, target)?.length! > 1 ? { from: anchor, to: target, path: findPath(network, anchor, target)!, progress: 0, speed: .12, offset: 0 } : null : null
+    let trip: Trip | null = null
+    if (target && target !== anchor) {
+      const path = findPath(network, anchor, target)
+      if (path && path.length > 1) trip = { from: anchor, to: target, path, progress: 0, speed: .12, offset: 0 }
+    }
     units.push({ mesh: body, trip, network, t: 0, speed: .11 + Math.random() * .04, lane: 0, fallback: null })
     if (trip) placeTraveler(units[units.length - 1])
   }
 }
+
+function vehicleRideHeight(mesh: Mesh) { const metadata = mesh.metadata as { rideHeight?: number } | null; return metadata?.rideHeight ?? .38 }
 
 function randomDistrictKey(state: GameState): string {
   const homes = state.buildings.filter(b => BUILDING_MAP[b.type]?.population)
@@ -639,9 +771,38 @@ function createThreatActors(scene:Scene,root:TransformNode,threats:TransformNode
 
 function moveAlongRoute(mesh:Mesh,time:number){const route=mesh.metadata?.route as CarRoute|undefined;if(!route)return;const span=Math.max(.1,route.max-route.min),value=route.min+((time*route.speed+route.offset)%span);if(route.axis==='x'){mesh.position.x=value;mesh.position.z=route.fixed}else{mesh.position.z=value;mesh.position.x=route.fixed}}
 function animateThreat(mesh:TransformNode,time:number){const motion=mesh.metadata?.motion as ThreatMotion|undefined;if(!motion)return;if(motion.kind==='epidemic'){mesh.position.y=1.45+Math.sin(time*2+motion.offset)*.22;mesh.scaling.setAll(.85+Math.sin(time*1.5+motion.offset)*.12);return}if(motion.kind==='monster'){const radius=motion.radius-Math.min(8,(time*motion.speed)%9);mesh.position.set(Math.cos(motion.angle+time*.04)*radius,Math.abs(Math.sin(time*2.2))*.12,Math.sin(motion.angle+time*.04)*radius);mesh.rotation.y=-motion.angle-time*.04+Math.PI/2;return}if(motion.kind==='responder'){const angle=motion.angle+Math.sin(time*.3)*.25;const radius=Math.max(4,motion.radius-((time*motion.speed+motion.offset)%14));mesh.position.set(Math.cos(angle)*radius,.5,Math.sin(angle)*radius);mesh.rotation.y=-angle+Math.PI/2;return}const radius=Math.max(6,motion.radius-((time*motion.speed+motion.offset)%15));mesh.position.set(Math.cos(motion.angle)*radius,.48,Math.sin(motion.angle)*radius);mesh.rotation.y=-motion.angle+Math.PI/2}
-function cabina(car:Mesh,cabin:Mesh,route:CarRoute){cabin.position.y=.26;if(route.axis==='z')car.rotation.y=Math.PI/2}
 function createRain(scene:Scene){const ps=new ParticleSystem('rain',5000,scene);ps.particleTexture=new Texture('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="2" height="16"%3E%3Cpath stroke="%23dff7ff" d="M1 0v16"/%3E%3C/svg%3E',scene);ps.minEmitBox=new Vector3(-35,0,-35);ps.maxEmitBox=new Vector3(35,0,35);ps.color1=new Color4(.7,.9,1,.65);ps.minSize=.08;ps.maxSize=.15;ps.minLifeTime=.5;ps.maxLifeTime=1;ps.gravity=new Vector3(-3,-38,1);ps.start();ps.emitter=null;return ps}
-async function ensureModels(rt:Runtime,props:Props){const buildingModels=props.state.buildings.filter(building=>isModelBackedBuilding(building.type)).map(building=>resolveBuildingAsset(building.type,building.level)!.key),names=[...new Set([...TREE_ASSET_KEYS,...buildingModels])],missing=names.filter(name=>!rt.assets.has(name)&&!rt.loading.has(name));if(!missing.length)return false;missing.forEach(name=>rt.loading.add(name));let changed=false;for(let index=0;index<missing.length;index+=2){await Promise.all(missing.slice(index,index+2).map(async name=>{try{const container=await SceneLoader.LoadAssetContainerAsync('/models/',`${name}.glb`,rt.scene);rt.assets.set(name,prepareAssetContainer(container));changed=true}catch(error){console.warn(`Unable to load ${name}: ${String(error)}`)}finally{rt.loading.delete(name)}}));await new Promise<void>(resolve=>requestAnimationFrame(()=>resolve()))}return changed}
+async function ensureModels(rt: Runtime, props: Props) {
+  const buildingModels = props.state.buildings
+    .filter(building => isModelBackedBuilding(building.type))
+    .map(building => resolveBuildingAsset(building.type, building.level)!.key)
+  const toolModel = isModelBackedBuilding(props.tool) ? resolveBuildingAsset(props.tool, 1)?.key : null
+  const hasRoad = props.state.buildings.some(building => building.type === 'road')
+  const supportModels: SupportAssetKey[] = hasRoad ? ['vehicle_car', ...STREET_PROP_ASSET_KEYS] : []
+  if (props.state.buildings.some(building => building.type === 'bus_stop')) supportModels.push('vehicle_bus')
+  if (props.state.buildings.some(building => building.type === 'fire')) supportModels.push('vehicle_fire_engine')
+
+  const names = [...new Set([...TREE_ASSET_KEYS, ...buildingModels, ...supportModels, ...(toolModel ? [toolModel] : [])])]
+  const missing = names.filter(name => !rt.assets.has(name) && !rt.loading.has(name))
+  if (!missing.length) return false
+  missing.forEach(name => rt.loading.add(name))
+  let changed = false
+  // Two concurrent GLB requests keep loading smooth on low-end mobile devices.
+  for (let index = 0; index < missing.length; index += 2) {
+    await Promise.all(missing.slice(index, index + 2).map(async name => {
+      try {
+        const container = await SceneLoader.LoadAssetContainerAsync('/models/', `${name}.glb`, rt.scene)
+        rt.assets.set(name, prepareAssetContainer(container)); changed = true
+      } catch (error) {
+        console.warn(`Unable to load ${name}: ${String(error)}`)
+      } finally {
+        rt.loading.delete(name)
+      }
+    }))
+    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
+  }
+  return changed
+}
 function material(scene:Scene,name:string,hex:string,alpha=1){let cache=MATERIAL_CACHE.get(scene);if(!cache){cache=new Map();MATERIAL_CACHE.set(scene,cache)}const family=name.split('-')[0],key=`${family}:${hex}:${alpha}`;const existing=cache.get(key);if(existing)return existing;const mat=new StandardMaterial(key,scene);mat.diffuseColor=Color3.FromHexString(hex);mat.alpha=alpha;mat.specularColor=new Color3(.08,.11,.1);cache.set(key,mat);return mat}
 function world(value:number){return (value-(GRID-1)/2)*TILE}
 function lighten(hex:string,amount:number){const n=parseInt(hex.slice(1),16),r=Math.min(255,(n>>16)+amount),g=Math.min(255,(n>>8&255)+amount),b=Math.min(255,(n&255)+amount);return `#${((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1)}`}

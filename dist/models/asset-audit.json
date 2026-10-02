@@ -1,422 +1,487 @@
 {
-  "generatedAt": "2026-09-30T01:48:22.146Z",
-  "assetCount": 105,
-  "totalBytes": 10851368,
+  "generatedAt": "2026-09-30T09:29:11.448Z",
+  "assetCount": 156,
+  "totalBytes": 15564564,
   "assets": [
     {
-      "file": "apartment_lv1.glb",
-      "bytes": 113716,
-      "vertices": 4356,
-      "triangles": 1452,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "file": "airport_terminal_lv1.glb",
+      "bytes": 19092,
+      "vertices": 612,
+      "triangles": 204,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.599999904632568
+          0,
+          -4.637499809265137
+        ],
+        "max": [
+          4.900000095367432,
+          4.873793601989746,
+          4.637499809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 4.873793601989746,
+        "depth": 9.274999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "airport_terminal_lv2.glb",
+      "bytes": 19092,
+      "vertices": 612,
+      "triangles": 204,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.637499809265137
+        ],
+        "max": [
+          4.900000095367432,
+          5.349999904632568,
+          4.637499809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 5.349999904632568,
+        "depth": 9.274999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "airport_terminal_lv3.glb",
+      "bytes": 31076,
+      "vertices": 1008,
+      "triangles": 336,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.637499809265137
+        ],
+        "max": [
+          4.900000095367432,
+          5.989999771118164,
+          4.637499809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 5.989999771118164,
+        "depth": 9.274999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "airport_terminal_lv4.glb",
+      "bytes": 31032,
+      "vertices": 1008,
+      "triangles": 336,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.637499809265137
+        ],
+        "max": [
+          4.900000095367432,
+          6.630000114440918,
+          4.637499809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 6.630000114440918,
+        "depth": 9.274999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "apartment_lv1.glb",
+      "bytes": 124800,
+      "vertices": 4356,
+      "triangles": 1452,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.862500190734863
         ],
         "max": [
           4.900000095367432,
           6.150000095367432,
-          5.125
+          4.862500190734863
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 6.150000102519989,
-        "depth": 9.724999904632568
+        "height": 6.150000095367432,
+        "depth": 9.725000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "brick",
-        "white",
-        "glass",
-        "glassDark",
-        "steel",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "apartment_lv2.glb",
-      "bytes": 149556,
+      "bytes": 166648,
       "vertices": 5850,
       "triangles": 1950,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.599999904632568
+          0,
+          -4.862500190734863
         ],
         "max": [
           4.900000095367432,
           7.710000038146973,
-          5.125
+          4.862500190734863
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 7.71000004529953,
-        "depth": 9.724999904632568
+        "height": 7.710000038146973,
+        "depth": 9.725000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "brick",
-        "white",
-        "glass",
-        "glassDark",
-        "steel",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "apartment_lv3.glb",
-      "bytes": 197844,
+      "bytes": 223096,
       "vertices": 7866,
       "triangles": 2622,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.599999904632568
+          0,
+          -4.862500190734863
         ],
         "max": [
           4.900000095367432,
           10.050000190734863,
-          5.125
+          4.862500190734863
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 10.050000197887421,
-        "depth": 9.724999904632568
+        "height": 10.050000190734863,
+        "depth": 9.725000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "brick",
-        "white",
-        "glass",
-        "glassDark",
-        "steel",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "apartment_lv4.glb",
-      "bytes": 242728,
+      "bytes": 274508,
       "vertices": 9702,
       "triangles": 3234,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.599999904632568
+          0,
+          -4.862500190734863
         ],
         "max": [
           4.900000095367432,
           12.88463306427002,
-          5.125
+          4.862500190734863
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 12.884633071422577,
-        "depth": 9.724999904632568
+        "height": 12.88463306427002,
+        "depth": 9.725000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "brick",
-        "white",
-        "glass",
-        "glassDark",
-        "steel",
-        "gold",
-        "wood",
-        "green",
-        "foliage",
-        "solar"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "apartment_lv5.glb",
-      "bytes": 293572,
+      "bytes": 332972,
       "vertices": 11790,
       "triangles": 3930,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.599999904632568
+          0,
+          -4.862500190734863
         ],
         "max": [
           4.900000095367432,
           16.0046329498291,
-          5.125
+          4.862500190734863
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 16.00463295698166,
-        "depth": 9.724999904632568
+        "height": 16.0046329498291,
+        "depth": 9.725000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "brick",
-        "white",
-        "glass",
-        "glassDark",
-        "steel",
-        "gold",
-        "wood",
-        "green",
-        "foliage",
-        "solar",
-        "teal"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "bridge_lv1.glb",
-      "bytes": 84040,
+      "bytes": 95520,
       "vertices": 3312,
       "triangles": 1104,
-      "drawCalls": 6,
-      "materials": 6,
-      "pbrMaterials": 6,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          0.009999996051192284,
+          0,
           -4.599999904632568
         ],
         "max": [
           4.900000095367432,
-          4.289999961853027,
+          4.279999732971191,
           4.599999904632568
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.279999965801835,
+        "height": 4.279999732971191,
         "depth": 9.199999809265137
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "asphalt",
-        "gold",
-        "steel",
-        "coral"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "bridge_lv2.glb",
-      "bytes": 84004,
+      "bytes": 95492,
       "vertices": 3312,
       "triangles": 1104,
-      "drawCalls": 6,
-      "materials": 6,
-      "pbrMaterials": 6,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          0.009999996051192284,
+          0,
           -4.599999904632568
         ],
         "max": [
           4.900000095367432,
-          4.289999961853027,
+          4.279999732971191,
           4.599999904632568
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.279999965801835,
+        "height": 4.279999732971191,
         "depth": 9.199999809265137
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "asphalt",
-        "gold",
-        "steel",
-        "coral"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "bridge_lv3.glb",
-      "bytes": 40844,
+      "bytes": 45108,
       "vertices": 1512,
       "triangles": 504,
-      "drawCalls": 6,
-      "materials": 6,
-      "pbrMaterials": 6,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          0.009999996051192284,
+          0,
           -4.599999904632568
         ],
         "max": [
           4.900000095367432,
-          8.02124309539795,
+          8.011242866516113,
           4.599999904632568
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 8.011243099346757,
+        "height": 8.011242866516113,
         "depth": 9.199999809265137
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "asphalt",
-        "gold",
-        "steel",
-        "white"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "bridge_lv4.glb",
-      "bytes": 117540,
+      "bytes": 132840,
       "vertices": 4644,
       "triangles": 1548,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          0.009999996051192284,
+          0,
           -7.277103900909424
         ],
         "max": [
           4.900000095367432,
-          8.27124309539795,
+          8.261242866516113,
           7.277103900909424
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 8.261243099346757,
+        "height": 8.261242866516113,
         "depth": 14.554207801818848
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.1993,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "asphalt",
-        "gold",
-        "steel",
-        "white",
-        "turquoise",
-        "teal"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "bus_stop_lv1.glb",
-      "bytes": 31940,
+      "bytes": 32064,
       "vertices": 1044,
       "triangles": 348,
-      "drawCalls": 9,
-      "materials": 9,
-      "pbrMaterials": 9,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -3.200000047683716
         ],
         "max": [
@@ -427,38 +492,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 2.874181746840477,
+        "height": 2.8741817474365234,
         "depth": 6.400000095367432
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "teal",
-        "glass",
-        "wood",
-        "steel",
-        "white",
-        "glassDark",
-        "green"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "bus_stop_lv2.glb",
-      "bytes": 61556,
+      "bytes": 65672,
       "vertices": 2244,
       "triangles": 748,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -3.200000047683716
         ],
         "max": [
@@ -469,39 +528,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 3.1199998849630357,
+        "height": 3.119999885559082,
         "depth": 6.400000095367432
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "teal",
-        "glass",
-        "wood",
-        "steel",
-        "white",
-        "glassDark",
-        "gold",
-        "green"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "bus_stop_lv3.glb",
-      "bytes": 96840,
+      "bytes": 105988,
       "vertices": 3684,
       "triangles": 1228,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -3.200000047683716
         ],
         "max": [
@@ -512,42 +564,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 3.1199998849630357,
+        "height": 3.119999885559082,
         "depth": 6.400000095367432
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "teal",
-        "glass",
-        "solar",
-        "wood",
-        "steel",
-        "white",
-        "glassDark",
-        "gold",
-        "green"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "bus_stop_lv4.glb",
-      "bytes": 101752,
+      "bytes": 110008,
       "vertices": 3828,
       "triangles": 1276,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -3.200000047683716
         ],
         "max": [
@@ -558,227 +600,453 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 3.1199998849630357,
+        "height": 3.119999885559082,
         "depth": 6.400000095367432
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "teal",
-        "glass",
-        "solar",
-        "wood",
-        "steel",
-        "white",
-        "glassDark",
-        "gold",
-        "turquoise",
-        "coral",
-        "green"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
-      "file": "clinic_lv1.glb",
-      "bytes": 58732,
-      "vertices": 2124,
-      "triangles": 708,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "file": "civic_tower_lv1.glb",
+      "bytes": 42280,
+      "vertices": 1440,
+      "triangles": 480,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.599999904632568
         ],
         "max": [
           4.900000095367432,
-          2.9149999618530273,
-          4.960000038146973
+          11.453923225402832,
+          4.599999904632568
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 2.9149999690055846,
-        "depth": 9.510000228881836
+        "height": 11.453923225402832,
+        "depth": 9.199999809265137
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
+      "warnings": []
+    },
+    {
+      "file": "civic_tower_lv2.glb",
+      "bytes": 44296,
+      "vertices": 1512,
+      "triangles": 504,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          14.153923034667969,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 14.153923034667969,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "civic_tower_lv3.glb",
+      "bytes": 46312,
+      "vertices": 1584,
+      "triangles": 528,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          16.853923797607422,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 16.853923797607422,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "civic_tower_lv4.glb",
+      "bytes": 62760,
+      "vertices": 2172,
+      "triangles": 724,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          21,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 21,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "clinic_lv1.glb",
+      "bytes": 61444,
+      "vertices": 2124,
+      "triangles": 708,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.755000114440918
+        ],
+        "max": [
+          4.900000095367432,
+          2.9149999618530273,
+          4.755000114440918
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 2.9149999618530273,
+        "depth": 9.510000228881836
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
     },
     {
       "file": "clinic_lv2.glb",
-      "bytes": 98488,
+      "bytes": 107804,
       "vertices": 3780,
       "triangles": 1260,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          -5.434999942779541,
+          0,
+          -4.755000114440918
         ],
         "max": [
-          5.96999979019165,
+          5.434999942779541,
           4.474999904632568,
-          4.960000038146973
+          4.755000114440918
         ]
       },
       "dimensions": {
         "width": 10.869999885559082,
-        "height": 4.474999911785126,
+        "height": 4.474999904632568,
         "depth": 9.510000228881836
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2668,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
+      "warnings": []
     },
     {
       "file": "clinic_lv3.glb",
-      "bytes": 148116,
+      "bytes": 165752,
       "vertices": 5850,
       "triangles": 1950,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          -5.434999942779541,
+          0,
+          -4.755000114440918
         ],
         "max": [
-          5.96999979019165,
+          5.434999942779541,
           6.034999847412109,
-          4.960000038146973
+          4.755000114440918
         ]
       },
       "dimensions": {
         "width": 10.869999885559082,
-        "height": 6.034999854564667,
+        "height": 6.034999847412109,
         "depth": 9.510000228881836
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2668,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
+      "warnings": []
     },
     {
       "file": "clinic_lv4.glb",
-      "bytes": 214528,
+      "bytes": 242260,
       "vertices": 8550,
       "triangles": 2850,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          -5.434999942779541,
+          0,
+          -4.755000114440918
         ],
         "max": [
-          5.96999979019165,
+          5.434999942779541,
           8.375,
-          4.960000038146973
+          4.755000114440918
         ]
       },
       "dimensions": {
         "width": 10.869999885559082,
-        "height": 8.375000007152558,
+        "height": 8.375,
         "depth": 9.510000228881836
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2668,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "steel",
-        "solar",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
-      "file": "drain_lv1.glb",
-      "bytes": 59596,
-      "vertices": 2160,
-      "triangles": 720,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "file": "defense_tower_lv1.glb",
+      "bytes": 36888,
+      "vertices": 1248,
+      "triangles": 416,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          11,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 11,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "defense_tower_lv2.glb",
+      "bytes": 36844,
+      "vertices": 1248,
+      "triangles": 416,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          12.550000190734863,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 12.550000190734863,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "defense_tower_lv3.glb",
+      "bytes": 42956,
+      "vertices": 1464,
+      "triangles": 488,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          14.100000381469727,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 14.100000381469727,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "defense_tower_lv4.glb",
+      "bytes": 71188,
+      "vertices": 2472,
+      "triangles": 824,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          15.649999618530273,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 15.649999618530273,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "drain_lv1.glb",
+      "bytes": 63296,
+      "vertices": 2160,
+      "triangles": 720,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -789,39 +1057,32 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 3.2699999803304673,
+        "height": 3.2699999809265137,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "dark",
-        "teal",
-        "turquoise",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "drain_lv2.glb",
-      "bytes": 59592,
+      "bytes": 63296,
       "vertices": 2160,
       "triangles": 720,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -832,136 +1093,248 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 3.6199998849630357,
+        "height": 3.619999885559082,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "dark",
-        "teal",
-        "turquoise",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "drain_lv3.glb",
-      "bytes": 81948,
+      "bytes": 87468,
       "vertices": 3024,
       "triangles": 1008,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.800000190734863,
-          5.9604643443123e-10,
+          -4.9375,
+          0,
           -4.400000095367432
         ],
         "max": [
-          5.074999809265137,
+          4.9375,
           4.5833024978637695,
           4.400000095367432
         ]
       },
       "dimensions": {
         "width": 9.875,
-        "height": 4.583302497267723,
+        "height": 4.5833024978637695,
         "depth": 8.800000190734863
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2937,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "dark",
-        "teal",
-        "turquoise",
-        "steel",
-        "solar",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "drain_lv4.glb",
-      "bytes": 89680,
+      "bytes": 95556,
       "vertices": 3312,
       "triangles": 1104,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.800000190734863,
-          5.9604643443123e-10,
+          -5.074999809265137,
+          0,
           -4.400000095367432
         ],
         "max": [
-          5.349999904632568,
+          5.074999809265137,
           4.933302402496338,
           4.400000095367432
         ]
       },
       "dimensions": {
-        "width": 10.150000095367432,
-        "height": 4.933302401900291,
+        "width": 10.149999618530273,
+        "height": 4.933302402496338,
         "depth": 8.800000190734863
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2857,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "dark",
-        "teal",
-        "turquoise",
-        "steel",
-        "solar",
-        "white",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
-      "file": "fire_lv1.glb",
-      "bytes": 55888,
-      "vertices": 2004,
-      "triangles": 668,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "file": "ferris_wheel_lv1.glb",
+      "bytes": 137952,
+      "vertices": 4824,
+      "triangles": 1608,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          7.472777843475342,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 7.472777843475342,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "ferris_wheel_lv2.glb",
+      "bytes": 143996,
+      "vertices": 5040,
+      "triangles": 1680,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          8.3100004196167,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 8.3100004196167,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "ferris_wheel_lv3.glb",
+      "bytes": 150048,
+      "vertices": 5256,
+      "triangles": 1752,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          9.011661529541016,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 9.011661529541016,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "ferris_wheel_lv4.glb",
+      "bytes": 156092,
+      "vertices": 5472,
+      "triangles": 1824,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.900000095367432,
+          9.829999923706055,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 9.829999923706055,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "fire_lv1.glb",
+      "bytes": 59020,
+      "vertices": 2004,
+      "triangles": 668,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -972,39 +1345,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 5.090000151991844,
+        "height": 5.090000152587891,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "red",
-        "dark",
-        "glass",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "fire_lv2.glb",
-      "bytes": 69708,
+      "bytes": 75144,
       "vertices": 2580,
       "triangles": 860,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1015,39 +1381,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 5.909999846816063,
+        "height": 5.909999847412109,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "red",
-        "dark",
-        "glass",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "fire_lv3.glb",
-      "bytes": 92884,
+      "bytes": 100284,
       "vertices": 3480,
       "triangles": 1160,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1058,43 +1417,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 6.73000001847744,
+        "height": 6.730000019073486,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "red",
-        "dark",
-        "glass",
-        "steel",
-        "solar",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "fire_lv4.glb",
-      "bytes": 120532,
+      "bytes": 132548,
       "vertices": 4632,
       "triangles": 1544,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1105,407 +1453,314 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 8.369999884963036,
+        "height": 8.369999885559082,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "red",
-        "dark",
-        "glass",
-        "steel",
-        "solar",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "hospital_lv1.glb",
-      "bytes": 107144,
+      "bytes": 117892,
       "vertices": 4140,
       "triangles": 1380,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.892499923706055
         ],
         "max": [
           4.900000095367432,
           4.474999904632568,
-          5.235000133514404
+          4.892499923706055
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.474999911785126,
-        "depth": 9.785000324249268
-      },
-      "bottomCentered": false,
-      "suggestedTileScale": 0.2959,
-      "nodeNames": [
-        "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "foliage"
-      ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
-    },
-    {
-      "file": "hospital_lv2.glb",
-      "bytes": 153792,
-      "vertices": 6084,
-      "triangles": 2028,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
-      "transformedNodes": 0,
-      "bounds": {
-        "min": [
-          -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
-        ],
-        "max": [
-          6.203999996185303,
-          6.034999847412109,
-          5.235000133514404
-        ]
-      },
-      "dimensions": {
-        "width": 11.104000091552734,
-        "height": 6.034999854564667,
-        "depth": 9.785000324249268
-      },
-      "bottomCentered": false,
-      "suggestedTileScale": 0.2612,
-      "nodeNames": [
-        "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "foliage"
-      ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
-    },
-    {
-      "file": "hospital_lv3.glb",
-      "bytes": 232800,
-      "vertices": 9378,
-      "triangles": 3126,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
-      "transformedNodes": 0,
-      "bounds": {
-        "min": [
-          -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
-        ],
-        "max": [
-          6.203999996185303,
-          8.375,
-          5.235000133514404
-        ]
-      },
-      "dimensions": {
-        "width": 11.104000091552734,
-        "height": 8.375000007152558,
-        "depth": 9.785000324249268
-      },
-      "bottomCentered": false,
-      "suggestedTileScale": 0.2612,
-      "nodeNames": [
-        "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "foliage"
-      ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
-    },
-    {
-      "file": "hospital_lv4.glb",
-      "bytes": 309596,
-      "vertices": 12510,
-      "triangles": 4170,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
-      "transformedNodes": 0,
-      "bounds": {
-        "min": [
-          -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
-        ],
-        "max": [
-          6.203999996185303,
-          10.71500015258789,
-          5.235000133514404
-        ]
-      },
-      "dimensions": {
-        "width": 11.104000091552734,
-        "height": 10.715000159740448,
-        "depth": 9.785000324249268
-      },
-      "bottomCentered": false,
-      "suggestedTileScale": 0.2612,
-      "nodeNames": [
-        "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "wood",
-        "green",
-        "steel",
-        "solar",
-        "foliage"
-      ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
-    },
-    {
-      "file": "hotel_lv1.glb",
-      "bytes": 44892,
-      "vertices": 1620,
-      "triangles": 540,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
-      "transformedNodes": 0,
-      "bounds": {
-        "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
-        ],
-        "max": [
-          4.900000095367432,
-          6.360000133514404,
-          4.650000095367432
-        ]
-      },
-      "dimensions": {
-        "width": 9.800000190734863,
-        "height": 6.3600001329183575,
-        "depth": 9.200000286102295
+        "height": 4.474999904632568,
+        "depth": 9.78499984741211
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "gold",
-        "glass",
-        "glassDark",
-        "coral",
-        "dark"
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "hospital_lv2.glb",
+      "bytes": 172316,
+      "vertices": 6084,
+      "triangles": 2028,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -5.552000045776367,
+          0,
+          -4.892499923706055
+        ],
+        "max": [
+          5.552000045776367,
+          6.034999847412109,
+          4.892499923706055
+        ]
+      },
+      "dimensions": {
+        "width": 11.104000091552734,
+        "height": 6.034999847412109,
+        "depth": 9.78499984741211
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2612,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "hospital_lv3.glb",
+      "bytes": 264552,
+      "vertices": 9378,
+      "triangles": 3126,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -5.552000045776367,
+          0,
+          -4.892499923706055
+        ],
+        "max": [
+          5.552000045776367,
+          8.375,
+          4.892499923706055
+        ]
+      },
+      "dimensions": {
+        "width": 11.104000091552734,
+        "height": 8.375,
+        "depth": 9.78499984741211
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2612,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "hospital_lv4.glb",
+      "bytes": 353164,
+      "vertices": 12510,
+      "triangles": 4170,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -5.552000045776367,
+          0,
+          -4.892499923706055
+        ],
+        "max": [
+          5.552000045776367,
+          10.71500015258789,
+          4.892499923706055
+        ]
+      },
+      "dimensions": {
+        "width": 11.104000091552734,
+        "height": 10.71500015258789,
+        "depth": 9.78499984741211
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2612,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "hotel_lv1.glb",
+      "bytes": 47328,
+      "vertices": 1620,
+      "triangles": 540,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.900000095367432,
+          0,
+          -4.600000381469727
+        ],
+        "max": [
+          4.900000095367432,
+          6.360000133514404,
+          4.600000381469727
+        ]
+      },
+      "dimensions": {
+        "width": 9.800000190734863,
+        "height": 6.360000133514404,
+        "depth": 9.200000762939453
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2959,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "hotel_lv2.glb",
-      "bytes": 85504,
+      "bytes": 94704,
       "vertices": 3312,
       "triangles": 1104,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          -5.366000175476074,
+          0,
+          -4.600000381469727
         ],
         "max": [
-          5.831999778747559,
+          5.366000175476074,
           9.399999618530273,
-          4.650000095367432
+          4.600000381469727
         ]
       },
       "dimensions": {
-        "width": 10.73199987411499,
-        "height": 9.399999617934228,
-        "depth": 9.200000286102295
+        "width": 10.732000350952148,
+        "height": 9.399999618530273,
+        "depth": 9.200000762939453
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2702,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "gold",
-        "glass",
-        "glassDark",
-        "coral",
-        "dark"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
+      "warnings": []
     },
     {
       "file": "hotel_lv3.glb",
-      "bytes": 144028,
+      "bytes": 160232,
       "vertices": 5652,
       "triangles": 1884,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          -5.366000175476074,
+          0,
+          -4.600000381469727
         ],
         "max": [
-          5.831999778747559,
+          5.366000175476074,
           13.199999809265137,
-          4.650000095367432
+          4.600000381469727
         ]
       },
       "dimensions": {
-        "width": 10.73199987411499,
-        "height": 13.19999980866909,
-        "depth": 9.200000286102295
+        "width": 10.732000350952148,
+        "height": 13.199999809265137,
+        "depth": 9.200000762939453
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2702,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "gold",
-        "glass",
-        "glassDark",
-        "coral",
-        "dark",
-        "green",
-        "wood",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "hotel_lv4.glb",
-      "bytes": 187044,
+      "bytes": 208516,
       "vertices": 7344,
       "triangles": 2448,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          -5.366000175476074,
+          0,
+          -4.600000381469727
         ],
         "max": [
-          5.831999778747559,
+          5.366000175476074,
           17.480100631713867,
-          4.650000095367432
+          4.600000381469727
         ]
       },
       "dimensions": {
-        "width": 10.73199987411499,
-        "height": 17.48010063111782,
-        "depth": 9.200000286102295
+        "width": 10.732000350952148,
+        "height": 17.480100631713867,
+        "depth": 9.200000762939453
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2702,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "gold",
-        "glass",
-        "glassDark",
-        "coral",
-        "dark",
-        "green",
-        "wood",
-        "foliage",
-        "steel",
-        "solar",
-        "white"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "house_lv1.glb",
-      "bytes": 41680,
+      "bytes": 42392,
       "vertices": 1446,
       "triangles": 482,
-      "drawCalls": 9,
-      "materials": 9,
-      "pbrMaterials": 9,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -4.25
         ],
         "max": [
@@ -1516,38 +1771,31 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 4.530000209212303,
+        "height": 4.53000020980835,
         "depth": 8.5
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "teal",
-        "glass",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "house_lv2.glb",
-      "bytes": 52308,
+      "bytes": 52176,
       "vertices": 1794,
       "triangles": 598,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -4.25
         ],
         "max": [
@@ -1558,43 +1806,31 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 4.519999980330467,
+        "height": 4.519999980926514,
         "depth": 8.5
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "white",
-        "terracotta",
-        "glass",
-        "dark",
-        "teal",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "house_lv3.glb",
-      "bytes": 71548,
+      "bytes": 75544,
       "vertices": 2598,
       "triangles": 866,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -4.25
         ],
         "max": [
@@ -1605,43 +1841,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 6.779999732375145,
+        "height": 6.779999732971191,
         "depth": 8.5
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "coral",
-        "brick",
-        "glass",
-        "dark",
-        "wood",
-        "glassDark",
-        "steel",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "house_lv4.glb",
-      "bytes": 65752,
+      "bytes": 68824,
       "vertices": 2358,
       "triangles": 786,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -4.25
         ],
         "max": [
@@ -1652,43 +1877,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 4.869999884963035,
+        "height": 4.869999885559082,
         "depth": 8.5
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "coral",
-        "glass",
-        "dark",
-        "glassDark",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "house_lv5.glb",
-      "bytes": 92728,
+      "bytes": 99572,
       "vertices": 3456,
       "triangles": 1152,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -4.25
         ],
         "max": [
@@ -1699,44 +1913,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 7.423999785780906,
+        "height": 7.423999786376953,
         "depth": 8.5
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "brick",
-        "coral",
-        "glass",
-        "dark",
-        "wood",
-        "glassDark",
-        "steel",
-        "teal",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "house_lv6.glb",
-      "bytes": 102176,
+      "bytes": 109656,
       "vertices": 3816,
       "triangles": 1272,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.699999809265137,
-          5.9604643443123e-10,
+          0,
           -4.25
         ],
         "max": [
@@ -1747,45 +1949,32 @@
       },
       "dimensions": {
         "width": 9.399999618530273,
-        "height": 7.529362677931785,
+        "height": 7.529362678527832,
         "depth": 8.5
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3085,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "brick",
-        "coral",
-        "glass",
-        "dark",
-        "wood",
-        "glassDark",
-        "steel",
-        "teal",
-        "green",
-        "solar",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "marina_lv1.glb",
-      "bytes": 32528,
+      "bytes": 33776,
       "vertices": 1104,
       "triangles": 368,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          1.7881393032936899e-9,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1796,37 +1985,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 2.6500000935792922,
+        "height": 2.6500000953674316,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "wood",
-        "steel",
-        "white",
-        "teal",
-        "glass",
-        "dark"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "marina_lv2.glb",
-      "bytes": 43856,
+      "bytes": 45204,
       "vertices": 1512,
       "triangles": 504,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          1.7881393032936899e-9,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1837,39 +2021,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.833698747754097,
+        "height": 3.8336987495422363,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "wood",
-        "steel",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "gold",
-        "coral"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "marina_lv3.glb",
-      "bytes": 59992,
+      "bytes": 64032,
       "vertices": 2184,
       "triangles": 728,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          1.7881393032936899e-9,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1880,39 +2057,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.833698747754097,
+        "height": 3.8336987495422363,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "wood",
-        "steel",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "gold",
-        "coral"
+        "glossy",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "marina_lv4.glb",
-      "bytes": 78644,
+      "bytes": 84812,
       "vertices": 2928,
       "triangles": 976,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          1.7881393032936899e-9,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1923,42 +2093,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.910000084042549,
+        "height": 3.9100000858306885,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "water",
-        "concrete",
-        "wood",
-        "steel",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "gold",
-        "coral",
-        "solar"
+        "glossy",
+        "rough",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "market_lv1.glb",
-      "bytes": 41972,
+      "bytes": 41952,
       "vertices": 1428,
       "triangles": 476,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -1969,39 +2129,31 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.6500000947713853,
+        "height": 3.6500000953674316,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "teal",
-        "coral",
-        "glass",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "market_lv2.glb",
-      "bytes": 58392,
+      "bytes": 59424,
       "vertices": 2052,
       "triangles": 684,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2012,43 +2164,31 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.539999961256981,
+        "height": 4.539999961853027,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "teal",
-        "white",
-        "coral",
-        "glass",
-        "gold",
-        "dark",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "market_lv3.glb",
-      "bytes": 84568,
+      "bytes": 90168,
       "vertices": 3150,
       "triangles": 1050,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2059,43 +2199,31 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 6.484000205397606,
+        "height": 6.484000205993652,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "teal",
-        "white",
-        "coral",
-        "glass",
-        "gold",
-        "dark",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "market_lv4.glb",
-      "bytes": 107780,
+      "bytes": 116280,
       "vertices": 4050,
       "triangles": 1350,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2106,45 +2234,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 8.286701201796532,
+        "height": 8.286701202392578,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "teal",
-        "white",
-        "coral",
-        "glass",
-        "gold",
-        "dark",
-        "wood",
-        "green",
-        "foliage",
-        "steel",
-        "solar"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "metro_station_lv1.glb",
-      "bytes": 16780,
+      "bytes": 17060,
       "vertices": 540,
       "triangles": 180,
-      "drawCalls": 5,
-      "materials": 5,
-      "pbrMaterials": 5,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.75,
-          -7.1525572131747595e-9,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -2155,34 +2270,31 @@
       },
       "dimensions": {
         "width": 9.5,
-        "height": 3.297452456951141,
+        "height": 3.297452449798584,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3053,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glass",
-        "coral"
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "metro_station_lv2.glb",
-      "bytes": 32932,
+      "bytes": 34192,
       "vertices": 1152,
       "triangles": 384,
-      "drawCalls": 7,
-      "materials": 7,
-      "pbrMaterials": 7,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.75,
-          -7.1525572131747595e-9,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -2193,36 +2305,31 @@
       },
       "dimensions": {
         "width": 9.5,
-        "height": 3.5774524283409117,
+        "height": 3.5774524211883545,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3053,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glass",
-        "coral",
-        "teal",
-        "glassDark"
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "metro_station_lv3.glb",
-      "bytes": 59584,
+      "bytes": 62420,
       "vertices": 2160,
       "triangles": 720,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.75,
-          -7.1525572131747595e-9,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -2233,39 +2340,31 @@
       },
       "dimensions": {
         "width": 9.5,
-        "height": 3.857452399730682,
+        "height": 3.857452392578125,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3053,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glass",
-        "coral",
-        "teal",
-        "glassDark",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "metro_station_lv4.glb",
-      "bytes": 70468,
+      "bytes": 73356,
       "vertices": 2520,
       "triangles": 840,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.75,
-          -7.1525572131747595e-9,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -2276,241 +2375,176 @@
       },
       "dimensions": {
         "width": 9.5,
-        "height": 4.290100581645966,
+        "height": 4.290100574493408,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3053,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glass",
-        "solar",
-        "coral",
-        "teal",
-        "glassDark",
-        "wood",
-        "green",
-        "foliage",
-        "steel",
-        "turquoise"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "mixed_use_lv1.glb",
-      "bytes": 106740,
+      "bytes": 115736,
       "vertices": 4032,
       "triangles": 1344,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          0,
+          -4.695000171661377
         ],
         "max": [
           4.900000095367432,
           4.079999923706055,
-          4.840000152587891
+          4.695000171661377
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.079999923110008,
+        "height": 4.079999923706055,
         "depth": 9.390000343322754
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "brick",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "white",
-        "glassDark",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "mixed_use_lv2.glb",
-      "bytes": 171556,
+      "bytes": 191340,
       "vertices": 6732,
       "triangles": 2244,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          -5.933000087738037,
+          0,
+          -4.695000171661377
         ],
         "max": [
-          6.966000080108643,
+          5.933000087738037,
           6.360000133514404,
-          4.840000152587891
+          4.695000171661377
         ]
       },
       "dimensions": {
         "width": 11.866000175476074,
-        "height": 6.3600001329183575,
+        "height": 6.360000133514404,
         "depth": 9.390000343322754
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2444,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "brick",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "white",
-        "glassDark",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "mixed_use_lv3.glb",
-      "bytes": 267360,
+      "bytes": 303228,
       "vertices": 10728,
       "triangles": 3576,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          -5.933000087738037,
+          0,
+          -4.695000171661377
         ],
         "max": [
-          6.966000080108643,
+          5.933000087738037,
           9.399999618530273,
-          4.840000152587891
+          4.695000171661377
         ]
       },
       "dimensions": {
         "width": 11.866000175476074,
-        "height": 9.399999617934228,
+        "height": 9.399999618530273,
         "depth": 9.390000343322754
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2444,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "brick",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "white",
-        "glassDark",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "mixed_use_lv4.glb",
-      "bytes": 353708,
+      "bytes": 403028,
       "vertices": 14292,
       "triangles": 4764,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
-          -4.550000190734863
+          -5.933000087738037,
+          0,
+          -4.695000171661377
         ],
         "max": [
-          6.966000080108643,
+          5.933000087738037,
           12.920101165771484,
-          4.840000152587891
+          4.695000171661377
         ]
       },
       "dimensions": {
         "width": 11.866000175476074,
-        "height": 12.920101165175438,
+        "height": 12.920101165771484,
         "depth": 9.390000343322754
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2444,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "brick",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "white",
-        "glassDark",
-        "steel",
-        "wood",
-        "green",
-        "foliage",
-        "solar"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "office_lv1.glb",
-      "bytes": 39000,
+      "bytes": 41276,
       "vertices": 1404,
       "triangles": 468,
-      "drawCalls": 7,
-      "materials": 7,
-      "pbrMaterials": 7,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2521,171 +2555,281 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 5.599999904036522,
+        "height": 5.599999904632568,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glassDark",
-        "glass",
-        "coral",
-        "dark"
+        "rough",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "office_lv2.glb",
-      "bytes": 79616,
+      "bytes": 88652,
       "vertices": 3096,
       "triangles": 1032,
-      "drawCalls": 7,
-      "materials": 7,
-      "pbrMaterials": 7,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
+          -5.366000175476074,
+          0,
           -4.550000190734863
         ],
         "max": [
-          5.831999778747559,
+          5.366000175476074,
           8.639999389648438,
           4.550000190734863
         ]
       },
       "dimensions": {
-        "width": 10.73199987411499,
-        "height": 8.639999389052392,
+        "width": 10.732000350952148,
+        "height": 8.639999389648438,
         "depth": 9.100000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2702,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glassDark",
-        "glass",
-        "coral",
-        "dark"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
+      "warnings": []
     },
     {
       "file": "office_lv3.glb",
-      "bytes": 138132,
+      "bytes": 154180,
       "vertices": 5436,
       "triangles": 1812,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
+          -5.366000175476074,
+          0,
           -4.550000190734863
         ],
         "max": [
-          5.831999778747559,
+          5.366000175476074,
           12.4399995803833,
           4.550000190734863
         ]
       },
       "dimensions": {
-        "width": 10.73199987411499,
-        "height": 12.439999579787255,
+        "width": 10.732000350952148,
+        "height": 12.4399995803833,
         "depth": 9.100000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2702,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glassDark",
-        "glass",
-        "coral",
-        "dark",
-        "green",
-        "wood",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
+      "warnings": []
     },
     {
       "file": "office_lv4.glb",
-      "bytes": 183820,
+      "bytes": 206500,
       "vertices": 7272,
       "triangles": 2424,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
+          -5.366000175476074,
+          0,
           -4.550000190734863
         ],
         "max": [
-          5.831999778747559,
+          5.366000175476074,
           17.480100631713867,
           4.550000190734863
         ]
       },
       "dimensions": {
-        "width": 10.73199987411499,
-        "height": 17.48010063111782,
+        "width": 10.732000350952148,
+        "height": 17.480100631713867,
         "depth": 9.100000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2702,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "glassDark",
-        "glass",
-        "coral",
-        "dark",
-        "green",
-        "wood",
-        "foliage",
-        "steel",
-        "solar"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
+    },
+    {
+      "file": "park_lv1.glb",
+      "bytes": 93632,
+      "vertices": 3240,
+      "triangles": 1080,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.800000190734863,
+          1.7100000381469727,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 1.7100000381469727,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "park_lv2.glb",
+      "bytes": 122196,
+      "vertices": 4260,
+      "triangles": 1420,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.800000190734863,
+          2.805000066757202,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 2.805000066757202,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "park_lv3.glb",
+      "bytes": 182648,
+      "vertices": 6420,
+      "triangles": 2140,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.800000190734863,
+          2.805000066757202,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 2.805000066757202,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "park_lv4.glb",
+      "bytes": 223972,
+      "vertices": 7896,
+      "triangles": 2632,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.599999904632568
+        ],
+        "max": [
+          4.800000190734863,
+          4.30330228805542,
+          4.599999904632568
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 4.30330228805542,
+        "depth": 9.199999809265137
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
     },
     {
       "file": "police_lv1.glb",
-      "bytes": 54328,
+      "bytes": 58012,
       "vertices": 1968,
       "triangles": 656,
-      "drawCalls": 9,
-      "materials": 9,
-      "pbrMaterials": 9,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2696,38 +2840,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.789999961256981,
+        "height": 3.7899999618530273,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "blue",
-        "dark",
-        "glass",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "police_lv2.glb",
-      "bytes": 81976,
+      "bytes": 90264,
       "vertices": 3120,
       "triangles": 1040,
-      "drawCalls": 9,
-      "materials": 9,
-      "pbrMaterials": 9,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2738,38 +2876,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 5.429999827742576,
+        "height": 5.429999828338623,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "blue",
-        "dark",
-        "glass",
-        "steel",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "police_lv3.glb",
-      "bytes": 118972,
+      "bytes": 131540,
       "vertices": 4596,
       "triangles": 1532,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2780,42 +2912,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 7.07000017106533,
+        "height": 7.070000171661377,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "blue",
-        "dark",
-        "glass",
-        "steel",
-        "solar",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "police_lv4.glb",
-      "bytes": 160456,
+      "bytes": 179924,
       "vertices": 6324,
       "triangles": 2108,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -2826,236 +2948,592 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 9.529999732375146,
+        "height": 9.529999732971191,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "blue",
-        "dark",
-        "glass",
-        "steel",
-        "solar",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
+    },
+    {
+      "file": "prop_bench.glb",
+      "bytes": 5956,
+      "vertices": 144,
+      "triangles": 48,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.824999988079071,
+          0,
+          -0.25
+        ],
+        "max": [
+          0.824999988079071,
+          1.215000033378601,
+          0.25
+        ]
+      },
+      "dimensions": {
+        "width": 1.649999976158142,
+        "height": 1.215000033378601,
+        "depth": 0.5
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 1.7576,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_bike_rack.glb",
+      "bytes": 37440,
+      "vertices": 1296,
+      "triangles": 432,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -1.125,
+          0,
+          -0.0476313978433609
+        ],
+        "max": [
+          1.125,
+          0.949999988079071,
+          0.0476313978433609
+        ]
+      },
+      "dimensions": {
+        "width": 2.25,
+        "height": 0.949999988079071,
+        "depth": 0.0952627956867218
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 1.2889,
+      "nodeNames": [
+        "asset",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_bin.glb",
+      "bytes": 19308,
+      "vertices": 648,
+      "triangles": 216,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.3400000035762787,
+          0,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.3400000035762787,
+          0.9546410441398621,
+          0.3400000035762787
+        ]
+      },
+      "dimensions": {
+        "width": 0.6800000071525574,
+        "height": 0.9546410441398621,
+        "depth": 0.6800000071525574
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 4.2647,
+      "nodeNames": [
+        "asset",
+        "rough"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_bollard.glb",
+      "bytes": 14612,
+      "vertices": 480,
+      "triangles": 160,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.14499999582767487,
+          0,
+          -0.13790319859981537
+        ],
+        "max": [
+          0.14499999582767487,
+          0.7200000286102295,
+          0.13790319859981537
+        ]
+      },
+      "dimensions": {
+        "width": 0.28999999165534973,
+        "height": 0.7200000286102295,
+        "depth": 0.27580639719963074
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 10,
+      "nodeNames": [
+        "asset",
+        "rough"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_hydrant.glb",
+      "bytes": 16552,
+      "vertices": 516,
+      "triangles": 172,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.2800000011920929,
+          0,
+          -0.26629582047462463
+        ],
+        "max": [
+          0.2800000011920929,
+          1.090000033378601,
+          0.26629582047462463
+        ]
+      },
+      "dimensions": {
+        "width": 0.5600000023841858,
+        "height": 1.090000033378601,
+        "depth": 0.5325916409492493
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 5.1786,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_planter.glb",
+      "bytes": 10504,
+      "vertices": 336,
+      "triangles": 112,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.527999997138977,
+          0,
+          -0.5021578073501587
+        ],
+        "max": [
+          0.527999997138977,
+          1.260599970817566,
+          0.5021578073501587
+        ]
+      },
+      "dimensions": {
+        "width": 1.055999994277954,
+        "height": 1.260599970817566,
+        "depth": 1.0043156147003174
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 2.7462,
+      "nodeNames": [
+        "asset",
+        "rough"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_street_light.glb",
+      "bytes": 12256,
+      "vertices": 396,
+      "triangles": 132,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.23999999463558197,
+          0,
+          -0.2282535582780838
+        ],
+        "max": [
+          0.23999999463558197,
+          3.0999999046325684,
+          0.2282535582780838
+        ]
+      },
+      "dimensions": {
+        "width": 0.47999998927116394,
+        "height": 3.0999999046325684,
+        "depth": 0.4565071165561676
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 6.0417,
+      "nodeNames": [
+        "asset",
+        "rough"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "prop_traffic_light.glb",
+      "bytes": 20924,
+      "vertices": 708,
+      "triangles": 236,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.1899999976158142,
+          0,
+          -0.21755282580852509
+        ],
+        "max": [
+          0.1899999976158142,
+          2.825000047683716,
+          0.21755282580852509
+        ]
+      },
+      "dimensions": {
+        "width": 0.3799999952316284,
+        "height": 2.825000047683716,
+        "depth": 0.43510565161705017
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 6.665,
+      "nodeNames": [
+        "asset",
+        "rough"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "research_lab_lv1.glb",
+      "bytes": 99004,
+      "vertices": 3432,
+      "triangles": 1144,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          4.355499744415283,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 4.355499744415283,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "research_lab_lv2.glb",
+      "bytes": 99004,
+      "vertices": 3432,
+      "triangles": 1144,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          5.06850004196167,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 5.06850004196167,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "research_lab_lv3.glb",
+      "bytes": 108004,
+      "vertices": 3756,
+      "triangles": 1252,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          5.828770160675049,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 5.828770160675049,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "research_lab_lv4.glb",
+      "bytes": 108008,
+      "vertices": 3756,
+      "triangles": 1252,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          6.494500160217285,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 6.494500160217285,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
     },
     {
       "file": "school_lv1.glb",
-      "bytes": 80156,
+      "bytes": 85636,
       "vertices": 2988,
       "triangles": 996,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           2.740000009536743,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 2.7400000166893004,
+        "height": 2.740000009536743,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "gold",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "school_lv2.glb",
-      "bytes": 99168,
+      "bytes": 107816,
       "vertices": 3780,
       "triangles": 1260,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           3.5199999809265137,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.519999988079071,
+        "height": 3.5199999809265137,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "gold",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "school_lv3.glb",
-      "bytes": 128348,
+      "bytes": 139968,
       "vertices": 4896,
       "triangles": 1632,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           4.30330228805542,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.303302295207978,
+        "height": 4.30330228805542,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "gold",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage",
-        "steel",
-        "solar",
-        "white"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "school_lv4.glb",
-      "bytes": 166384,
+      "bytes": 184320,
       "vertices": 6480,
       "triangles": 2160,
-      "drawCalls": 14,
-      "materials": 14,
-      "pbrMaterials": 14,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           5.863302230834961,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 5.863302237987519,
+        "height": 5.863302230834961,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "gold",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage",
-        "steel",
-        "solar",
-        "white"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "seawall_lv1.glb",
-      "bytes": 28476,
+      "bytes": 32376,
       "vertices": 1056,
       "triangles": 352,
-      "drawCalls": 4,
-      "materials": 4,
-      "pbrMaterials": 4,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.849999904632568,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3066,33 +3544,32 @@
       },
       "dimensions": {
         "width": 9.699999809265137,
-        "height": 1.8999999755620958,
+        "height": 1.899999976158142,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.299,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "steel"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "seawall_lv2.glb",
-      "bytes": 31752,
+      "bytes": 35384,
       "vertices": 1164,
       "triangles": 388,
-      "drawCalls": 5,
-      "materials": 5,
-      "pbrMaterials": 5,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.849999904632568,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3103,34 +3580,32 @@
       },
       "dimensions": {
         "width": 9.699999809265137,
-        "height": 2.099999904036522,
+        "height": 2.0999999046325684,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.299,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "steel",
-        "dark"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "seawall_lv3.glb",
-      "bytes": 52588,
+      "bytes": 57884,
       "vertices": 1968,
       "triangles": 656,
-      "drawCalls": 7,
-      "materials": 7,
-      "pbrMaterials": 7,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.849999904632568,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3141,36 +3616,32 @@
       },
       "dimensions": {
         "width": 9.699999809265137,
-        "height": 2.299999951720238,
+        "height": 2.299999952316284,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.299,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "steel",
-        "dark",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "seawall_lv4.glb",
-      "bytes": 74144,
+      "bytes": 82080,
       "vertices": 2832,
       "triangles": 944,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.849999904632568,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3181,37 +3652,316 @@
       },
       "dimensions": {
         "width": 9.699999809265137,
-        "height": 3.3199999326467515,
+        "height": 3.319999933242798,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.299,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "water",
-        "steel",
-        "dark",
-        "green",
-        "foliage",
-        "gold"
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "security_hub_lv1.glb",
+      "bytes": 80184,
+      "vertices": 2760,
+      "triangles": 920,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          5.846602439880371,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 5.846602439880371,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "security_hub_lv2.glb",
+      "bytes": 96316,
+      "vertices": 3336,
+      "triangles": 1112,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          7.116602420806885,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 7.116602420806885,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "security_hub_lv3.glb",
+      "bytes": 121452,
+      "vertices": 4236,
+      "triangles": 1412,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          8.386602401733398,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 8.386602401733398,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "security_hub_lv4.glb",
+      "bytes": 154380,
+      "vertices": 5412,
+      "triangles": 1804,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          9.65660285949707,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 9.65660285949707,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "shelter_lv1.glb",
+      "bytes": 16748,
+      "vertices": 528,
+      "triangles": 176,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          3.200000047683716,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 3.200000047683716,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "shelter_lv2.glb",
+      "bytes": 25804,
+      "vertices": 852,
+      "triangles": 284,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          3.5,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 3.5,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "shelter_lv3.glb",
+      "bytes": 27836,
+      "vertices": 924,
+      "triangles": 308,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          3.799999952316284,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 3.799999952316284,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "shelter_lv4.glb",
+      "bytes": 43964,
+      "vertices": 1500,
+      "triangles": 500,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.800000190734863,
+          0,
+          -4.449999809265137
+        ],
+        "max": [
+          4.800000190734863,
+          4.28000020980835,
+          4.449999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 9.600000381469727,
+        "height": 4.28000020980835,
+        "depth": 8.899999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3021,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "solar_lv1.glb",
-      "bytes": 26144,
+      "bytes": 26044,
       "vertices": 828,
       "triangles": 276,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3222,37 +3972,32 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 2.289999961256981,
+        "height": 2.2899999618530273,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "solar",
-        "white",
-        "teal",
-        "glassDark",
-        "coral"
+        "rough",
+        "metallic",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "solar_lv2.glb",
-      "bytes": 31312,
+      "bytes": 32092,
       "vertices": 1044,
       "triangles": 348,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3263,37 +4008,32 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 2.470000028014183,
+        "height": 2.4700000286102295,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "solar",
-        "white",
-        "teal",
-        "glassDark",
-        "coral"
+        "rough",
+        "metallic",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "solar_lv3.glb",
-      "bytes": 48716,
+      "bytes": 51548,
       "vertices": 1740,
       "triangles": 580,
-      "drawCalls": 9,
-      "materials": 9,
-      "pbrMaterials": 9,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3304,38 +4044,32 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 3.0799999231100084,
+        "height": 3.0799999237060547,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "solar",
-        "white",
-        "teal",
-        "glassDark",
-        "coral",
-        "gold"
+        "rough",
+        "metallic",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "solar_lv4.glb",
-      "bytes": 56420,
+      "bytes": 59612,
       "vertices": 2028,
       "triangles": 676,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3346,39 +4080,172 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 3.0799999231100084,
+        "height": 3.0799999237060547,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "solar",
-        "white",
-        "teal",
-        "glassDark",
-        "coral",
-        "gold",
-        "turquoise"
+        "rough",
+        "metallic",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "stadium_lv1.glb",
+      "bytes": 91400,
+      "vertices": 3192,
+      "triangles": 1064,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -5.358999729156494,
+          0,
+          -4.659999847412109
+        ],
+        "max": [
+          5.358999729156494,
+          4.489999771118164,
+          4.659999847412109
+        ]
+      },
+      "dimensions": {
+        "width": 10.717999458312988,
+        "height": 4.489999771118164,
+        "depth": 9.319999694824219
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2706,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "stadium_lv2.glb",
+      "bytes": 91404,
+      "vertices": 3192,
+      "triangles": 1064,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -5.6579999923706055,
+          0,
+          -4.920000076293945
+        ],
+        "max": [
+          5.6579999923706055,
+          4.989999771118164,
+          4.920000076293945
+        ]
+      },
+      "dimensions": {
+        "width": 11.315999984741211,
+        "height": 4.989999771118164,
+        "depth": 9.84000015258789
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2563,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "stadium_lv3.glb",
+      "bytes": 105516,
+      "vertices": 3696,
+      "triangles": 1232,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -5.956999778747559,
+          0,
+          -5.179999828338623
+        ],
+        "max": [
+          5.956999778747559,
+          5.489999771118164,
+          5.179999828338623
+        ]
+      },
+      "dimensions": {
+        "width": 11.913999557495117,
+        "height": 5.489999771118164,
+        "depth": 10.359999656677246
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2434,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "stadium_lv4.glb",
+      "bytes": 105512,
+      "vertices": 3696,
+      "triangles": 1232,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -6.25600004196167,
+          0,
+          -5.440000057220459
+        ],
+        "max": [
+          6.25600004196167,
+          5.989999771118164,
+          5.440000057220459
+        ]
+      },
+      "dimensions": {
+        "width": 12.51200008392334,
+        "height": 5.989999771118164,
+        "depth": 10.880000114440918
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.2318,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "substation_lv1.glb",
-      "bytes": 87944,
+      "bytes": 97396,
       "vertices": 3408,
       "triangles": 1136,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3389,37 +4256,31 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 3.7779421800374986,
+        "height": 3.777942180633545,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "gold",
-        "dark",
-        "ivory",
-        "teal",
-        "coral"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "substation_lv2.glb",
-      "bytes": 101192,
+      "bytes": 112856,
       "vertices": 3960,
       "triangles": 1320,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3430,37 +4291,31 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 4.027942180037498,
+        "height": 4.027942180633545,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "gold",
-        "dark",
-        "ivory",
-        "teal",
-        "coral"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "substation_lv3.glb",
-      "bytes": 109840,
+      "bytes": 122936,
       "vertices": 4320,
       "triangles": 1440,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3471,37 +4326,31 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 4.277942180037498,
+        "height": 4.277942180633545,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "gold",
-        "dark",
-        "ivory",
-        "teal",
-        "coral"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "substation_lv4.glb",
-      "bytes": 114028,
+      "bytes": 125960,
       "vertices": 4428,
       "triangles": 1476,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.800000190734863,
-          5.9604643443123e-10,
+          0,
           -4.400000095367432
         ],
         "max": [
@@ -3512,39 +4361,31 @@
       },
       "dimensions": {
         "width": 9.600000381469727,
-        "height": 4.527942180037498,
+        "height": 4.527942180633545,
         "depth": 8.800000190734863
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3021,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "gold",
-        "dark",
-        "ivory",
-        "teal",
-        "coral",
-        "solar",
-        "white"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "supermarket_lv1.glb",
-      "bytes": 42160,
+      "bytes": 41284,
       "vertices": 1404,
       "triangles": 468,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.550000190734863
         ],
         "max": [
@@ -3555,185 +4396,137 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 2.4000000947713853,
+        "height": 2.4000000953674316,
         "depth": 9.100000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "coral",
-        "dark",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "supermarket_lv2.glb",
-      "bytes": 67248,
+      "bytes": 70516,
       "vertices": 2448,
       "triangles": 816,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
+          -5.933000087738037,
+          0,
           -4.550000190734863
         ],
         "max": [
-          6.966000080108643,
+          5.933000087738037,
           2.4000000953674316,
           4.550000190734863
         ]
       },
       "dimensions": {
         "width": 11.866000175476074,
-        "height": 2.4000000947713853,
+        "height": 2.4000000953674316,
         "depth": 9.100000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2444,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "supermarket_lv3.glb",
-      "bytes": 104288,
+      "bytes": 113856,
       "vertices": 3996,
       "triangles": 1332,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
+          -5.933000087738037,
+          0,
           -4.550000190734863
         ],
         "max": [
-          6.966000080108643,
+          5.933000087738037,
           2.559999942779541,
           4.550000190734863
         ]
       },
       "dimensions": {
         "width": 11.866000175476074,
-        "height": 2.5599999421834947,
+        "height": 2.559999942779541,
         "depth": 9.100000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2444,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "supermarket_lv4.glb",
-      "bytes": 141340,
+      "bytes": 156100,
       "vertices": 5472,
       "triangles": 1824,
-      "drawCalls": 13,
-      "materials": 13,
-      "pbrMaterials": 13,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -4.900000095367432,
-          5.9604643443123e-10,
+          -5.933000087738037,
+          0,
           -4.550000190734863
         ],
         "max": [
-          6.966000080108643,
+          5.933000087738037,
           4.560100555419922,
           4.550000190734863
         ]
       },
       "dimensions": {
         "width": 11.866000175476074,
-        "height": 4.560100554823875,
+        "height": 4.560100555419922,
         "depth": 9.100000381469727
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2444,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "teal",
-        "glass",
-        "dark",
-        "coral",
-        "gold",
-        "wood",
-        "green",
-        "foliage",
-        "steel",
-        "solar"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "train_station_lv1.glb",
-      "bytes": 48364,
+      "bytes": 52204,
       "vertices": 1764,
       "triangles": 588,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.599999904632568
         ],
         "max": [
@@ -3744,37 +4537,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.279632806181908,
+        "height": 3.279632806777954,
         "depth": 9.199999809265137
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "asphalt",
-        "rail",
-        "wood",
-        "white",
-        "glass",
-        "coral"
+        "rough",
+        "metallic",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "train_station_lv2.glb",
-      "bytes": 85520,
+      "bytes": 95548,
       "vertices": 3312,
       "triangles": 1104,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.925000190734863
         ],
         "max": [
@@ -3785,37 +4573,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.539999961256981,
+        "height": 3.5399999618530273,
         "depth": 9.850000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2944,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "asphalt",
-        "rail",
-        "wood",
-        "white",
-        "glass",
-        "coral"
+        "rough",
+        "metallic",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "train_station_lv3.glb",
-      "bytes": 90420,
+      "bytes": 99576,
       "vertices": 3456,
       "triangles": 1152,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.925000190734863
         ],
         "max": [
@@ -3826,39 +4609,32 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 3.8799998754262925,
+        "height": 3.879999876022339,
         "depth": 9.850000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2944,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "asphalt",
-        "rail",
-        "wood",
-        "white",
-        "glass",
-        "coral",
-        "teal",
-        "glassDark"
+        "rough",
+        "metallic",
+        "glossy"
       ],
       "warnings": []
     },
     {
       "file": "train_station_lv4.glb",
-      "bytes": 103156,
+      "bytes": 112700,
       "vertices": 3924,
       "triangles": 1308,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          5.9604643443123e-10,
+          0,
           -4.925000190734863
         ],
         "max": [
@@ -3869,455 +4645,379 @@
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.848770141005516,
+        "height": 4.8487701416015625,
         "depth": 9.850000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.2944,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "asphalt",
-        "rail",
-        "wood",
-        "white",
-        "glass",
-        "coral",
-        "solar",
-        "teal",
-        "glassDark",
-        "steel"
+        "rough",
+        "metallic",
+        "glossy"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "tree_canopy.glb",
-      "bytes": 39504,
+      "bytes": 44148,
       "vertices": 1536,
       "triangles": 512,
-      "drawCalls": 3,
-      "materials": 3,
-      "pbrMaterials": 3,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -1.8590503931045532,
-          0.02500002458691597,
+          -1.8620796203613281,
+          0,
           -1.2656437158584595
         ],
         "max": [
-          1.8651087284088135,
-          4.288000106811523,
+          1.8620796203613281,
+          4.263000011444092,
           1.2656437158584595
         ]
       },
       "dimensions": {
-        "width": 3.7241591215133667,
-        "height": 4.2630000822246075,
+        "width": 3.7241592407226562,
+        "height": 4.263000011444092,
         "depth": 2.531287431716919
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.7787,
       "nodeNames": [
         "asset",
-        "wood",
-        "green",
-        "foliage"
+        "rough"
       ],
       "warnings": []
     },
     {
       "file": "tree_columnar.glb",
-      "bytes": 6704,
+      "bytes": 6840,
       "vertices": 204,
       "triangles": 68,
-      "drawCalls": 2,
-      "materials": 2,
-      "pbrMaterials": 2,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -0.6657395362854004,
-          0.05000000074505806,
+          0,
           -0.699999988079071
         ],
         "max": [
           0.6657395362854004,
-          5.050000190734863,
+          5,
           0.699999988079071
         ]
       },
       "dimensions": {
         "width": 1.3314790725708008,
-        "height": 5.000000189989805,
+        "height": 5,
         "depth": 1.399999976158142
       },
       "bottomCentered": true,
       "suggestedTileScale": 2.0714,
       "nodeNames": [
         "asset",
-        "wood",
-        "green"
+        "rough"
       ],
       "warnings": []
     },
     {
       "file": "tree_flowering.glb",
-      "bytes": 32952,
+      "bytes": 37460,
       "vertices": 1296,
       "triangles": 432,
-      "drawCalls": 2,
-      "materials": 2,
-      "pbrMaterials": 2,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -1.5080000162124634,
-          0.02500004693865776,
+          -1.5045000314712524,
+          0,
           -0.9510565400123596
         ],
         "max": [
-          1.5010000467300415,
-          3.8940000534057617,
+          1.5045000314712524,
+          3.86899995803833,
           0.9510565400123596
         ]
       },
       "dimensions": {
         "width": 3.009000062942505,
-        "height": 3.869000006467104,
+        "height": 3.86899995803833,
         "depth": 1.9021130800247192
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.9638,
       "nodeNames": [
         "asset",
-        "wood",
-        "pink"
+        "rough"
       ],
       "warnings": []
     },
     {
       "file": "tree_ornamental.glb",
-      "bytes": 22304,
+      "bytes": 25008,
       "vertices": 852,
       "triangles": 284,
-      "drawCalls": 2,
-      "materials": 2,
-      "pbrMaterials": 2,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -0.944983184337616,
-          0.020000023767352104,
+          -0.9459203481674194,
+          0,
           -0.646718442440033
         ],
         "max": [
-          0.9468575119972229,
-          2.9100000858306885,
+          0.9459203481674194,
+          2.890000104904175,
           0.646718442440033
         ]
       },
       "dimensions": {
         "width": 1.8918406963348389,
-        "height": 2.8900000620633364,
+        "height": 2.890000104904175,
         "depth": 1.293436884880066
       },
       "bottomCentered": true,
       "suggestedTileScale": 1.5329,
       "nodeNames": [
         "asset",
-        "wood",
-        "yellow"
+        "rough"
       ],
       "warnings": []
     },
     {
       "file": "tree_palm.glb",
-      "bytes": 11020,
+      "bytes": 11852,
       "vertices": 384,
       "triangles": 128,
+      "drawCalls": 1,
+      "materials": 1,
+      "pbrMaterials": 1,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -1.7699999809265137,
+          0,
+          -1.7653932571411133
+        ],
+        "max": [
+          1.7699999809265137,
+          4.427821159362793,
+          1.7653932571411133
+        ]
+      },
+      "dimensions": {
+        "width": 3.5399999618530273,
+        "height": 4.427821159362793,
+        "depth": 3.5307865142822266
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.8192,
+      "nodeNames": [
+        "asset",
+        "rough"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "tree_young.glb",
+      "bytes": 16032,
+      "vertices": 498,
+      "triangles": 166,
       "drawCalls": 2,
       "materials": 2,
       "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
-          -1.4199999570846558,
-          -0.018712492659687996,
-          -1.7653932571411133
-        ],
-        "max": [
-          2.119999885559082,
-          4.409108638763428,
-          1.7653932571411133
-        ]
-      },
-      "dimensions": {
-        "width": 3.539999842643738,
-        "height": 4.427821131423116,
-        "depth": 3.5307865142822266
-      },
-      "bottomCentered": false,
-      "suggestedTileScale": 0.8192,
-      "nodeNames": [
-        "asset",
-        "wood",
-        "green"
-      ],
-      "warnings": [
-        "pivot-not-bottom-center"
-      ]
-    },
-    {
-      "file": "tree_young.glb",
-      "bytes": 14604,
-      "vertices": 498,
-      "triangles": 166,
-      "drawCalls": 3,
-      "materials": 3,
-      "pbrMaterials": 3,
-      "transformedNodes": 0,
-      "bounds": {
-        "min": [
-          -0.5400000214576721,
-          0.02499997615814209,
+          -0.5237170457839966,
+          0,
           -0.7506176829338074
         ],
         "max": [
-          0.5074340105056763,
-          3.614000082015991,
+          0.5237170457839966,
+          3.5890002250671387,
           0.7506176829338074
         ]
       },
       "dimensions": {
-        "width": 1.0474340319633484,
-        "height": 3.589000105857849,
+        "width": 1.0474340915679932,
+        "height": 3.5890002250671387,
         "depth": 1.5012353658676147
       },
       "bottomCentered": true,
       "suggestedTileScale": 1.9317,
       "nodeNames": [
         "asset",
-        "wood",
-        "green",
-        "steel"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "university_lv1.glb",
-      "bytes": 127064,
+      "bytes": 139404,
       "vertices": 4908,
       "triangles": 1636,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           4.300000190734863,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 4.300000197887421,
+        "height": 4.300000190734863,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "teal",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage",
-        "gold"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "university_lv2.glb",
-      "bytes": 165100,
+      "bytes": 183756,
       "vertices": 6492,
       "triangles": 2164,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           5.860000133514404,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 5.860000140666962,
+        "height": 5.860000133514404,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "teal",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage",
-        "gold"
+        "rough",
+        "glossy"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "university_lv3.glb",
-      "bytes": 213300,
+      "bytes": 238080,
       "vertices": 8400,
       "triangles": 2800,
-      "drawCalls": 15,
-      "materials": 15,
-      "pbrMaterials": 15,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           7.423302173614502,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 7.42330218076706,
+        "height": 7.423302173614502,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "teal",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage",
-        "steel",
-        "solar",
-        "white",
-        "gold"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "university_lv4.glb",
-      "bytes": 270320,
+      "bytes": 304608,
       "vertices": 10776,
       "triangles": 3592,
-      "drawCalls": 15,
-      "materials": 15,
-      "pbrMaterials": 15,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.900000095367432,
-          -7.1525572131747595e-9,
-          -4.550000190734863
+          0,
+          -4.670000076293945
         ],
         "max": [
           4.900000095367432,
           9.76330280303955,
-          4.789999961853027
+          4.670000076293945
         ]
       },
       "dimensions": {
         "width": 9.800000190734863,
-        "height": 9.763302810192108,
+        "height": 9.76330280303955,
         "depth": 9.34000015258789
       },
-      "bottomCentered": false,
+      "bottomCentered": true,
       "suggestedTileScale": 0.2959,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "ivory",
-        "coral",
-        "glass",
-        "dark",
-        "teal",
-        "glassDark",
-        "green",
-        "wood",
-        "foliage",
-        "steel",
-        "solar",
-        "white",
-        "gold"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "pivot-not-bottom-center",
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "uv_station_lv1.glb",
-      "bytes": 118160,
+      "bytes": 130600,
       "vertices": 4560,
       "triangles": 1520,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.599999904632568,
-          5.9604643443123e-10,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -4328,42 +5028,32 @@
       },
       "dimensions": {
         "width": 9.199999809265137,
-        "height": 8.369999884963036,
+        "height": 8.369999885559082,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3152,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "turquoise",
-        "glassDark",
-        "steel",
-        "glass",
-        "gold",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "uv_station_lv2.glb",
-      "bytes": 148308,
+      "bytes": 164804,
       "vertices": 5784,
       "triangles": 1928,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.599999904632568,
-          5.9604643443123e-10,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -4374,43 +5064,32 @@
       },
       "dimensions": {
         "width": 9.199999809265137,
-        "height": 9.090000151991845,
+        "height": 9.09000015258789,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3152,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "turquoise",
-        "glassDark",
-        "steel",
-        "glass",
-        "gold",
-        "solar",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "uv_station_lv3.glb",
-      "bytes": 167312,
+      "bytes": 186976,
       "vertices": 6576,
       "triangles": 2192,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.599999904632568,
-          5.9604643443123e-10,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -4421,43 +5100,32 @@
       },
       "dimensions": {
         "width": 9.199999809265137,
-        "height": 9.810000419020653,
+        "height": 9.8100004196167,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3152,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "turquoise",
-        "glassDark",
-        "steel",
-        "glass",
-        "gold",
-        "solar",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
     },
     {
       "file": "uv_station_lv4.glb",
-      "bytes": 188056,
+      "bytes": 211176,
       "vertices": 7440,
       "triangles": 2480,
-      "drawCalls": 12,
-      "materials": 12,
-      "pbrMaterials": 12,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.599999904632568,
-          5.9604643443123e-10,
+          0,
           -4.300000190734863
         ],
         "max": [
@@ -4468,43 +5136,138 @@
       },
       "dimensions": {
         "width": 9.199999809265137,
-        "height": 10.529999732375146,
+        "height": 10.529999732971191,
         "depth": 8.600000381469727
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3152,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "white",
-        "turquoise",
-        "glassDark",
-        "steel",
-        "glass",
-        "gold",
-        "solar",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "glossy",
+        "metallic"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
+    },
+    {
+      "file": "vehicle_bus.glb",
+      "bytes": 54352,
+      "vertices": 1872,
+      "triangles": 624,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.6923422813415527,
+          0,
+          -2.25
+        ],
+        "max": [
+          0.6923422813415527,
+          1.559999942779541,
+          2.25
+        ]
+      },
+      "dimensions": {
+        "width": 1.3846845626831055,
+        "height": 1.559999942779541,
+        "depth": 4.5
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.6444,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "vehicle_car.glb",
+      "bytes": 53368,
+      "vertices": 1836,
+      "triangles": 612,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.6539422869682312,
+          0,
+          -1.0750000476837158
+        ],
+        "max": [
+          0.6539422869682312,
+          1.3700000047683716,
+          1.0750000476837158
+        ]
+      },
+      "dimensions": {
+        "width": 1.3078845739364624,
+        "height": 1.3700000047683716,
+        "depth": 2.1500000953674316
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 1.3488,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "vehicle_fire_engine.glb",
+      "bytes": 56248,
+      "vertices": 1908,
+      "triangles": 636,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -0.6539422869682312,
+          0,
+          -1.899999976158142
+        ],
+        "max": [
+          0.6539422869682312,
+          1.690000057220459,
+          1.899999976158142
+        ]
+      },
+      "dimensions": {
+        "width": 1.3078845739364624,
+        "height": 1.690000057220459,
+        "depth": 3.799999952316284
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.7632,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
     },
     {
       "file": "water_lv1.glb",
-      "bytes": 117364,
+      "bytes": 131408,
       "vertices": 4620,
       "triangles": 1540,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.400000095367432,
-          5.9604643443123e-10,
+          0,
           -4.199999809265137
         ],
         "max": [
@@ -4515,37 +5278,31 @@
       },
       "dimensions": {
         "width": 8.800000190734863,
-        "height": 10.149999617934228,
+        "height": 10.149999618530273,
         "depth": 8.399999618530273
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3295,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "turquoise",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "water_lv2.glb",
-      "bytes": 117364,
+      "bytes": 131408,
       "vertices": 4620,
       "triangles": 1540,
-      "drawCalls": 8,
-      "materials": 8,
-      "pbrMaterials": 8,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.400000095367432,
-          5.9604643443123e-10,
+          0,
           -4.199999809265137
         ],
         "max": [
@@ -4556,37 +5313,31 @@
       },
       "dimensions": {
         "width": 8.800000190734863,
-        "height": 10.85000038087368,
+        "height": 10.850000381469727,
         "depth": 8.399999618530273
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3295,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "turquoise",
-        "white",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "water_lv3.glb",
-      "bytes": 127484,
+      "bytes": 141420,
       "vertices": 4980,
       "triangles": 1660,
-      "drawCalls": 10,
-      "materials": 10,
-      "pbrMaterials": 10,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.400000095367432,
-          5.9604643443123e-10,
+          0,
           -4.199999809265137
         ],
         "max": [
@@ -4597,39 +5348,31 @@
       },
       "dimensions": {
         "width": 8.800000190734863,
-        "height": 11.550000190138817,
+        "height": 11.550000190734863,
         "depth": 8.399999618530273
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3295,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "turquoise",
-        "white",
-        "teal",
-        "solar",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "metallic"
       ],
       "warnings": []
     },
     {
       "file": "water_lv4.glb",
-      "bytes": 145564,
+      "bytes": 162500,
       "vertices": 5700,
       "triangles": 1900,
-      "drawCalls": 11,
-      "materials": 11,
-      "pbrMaterials": 11,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
       "transformedNodes": 0,
       "bounds": {
         "min": [
           -4.400000095367432,
-          5.9604643443123e-10,
+          0,
           -4.199999809265137
         ],
         "max": [
@@ -4640,28 +5383,160 @@
       },
       "dimensions": {
         "width": 8.800000190734863,
-        "height": 12.249999999403954,
+        "height": 12.25,
         "depth": 8.399999618530273
       },
       "bottomCentered": true,
       "suggestedTileScale": 0.3295,
       "nodeNames": [
         "asset",
-        "pavement",
-        "concrete",
-        "steel",
-        "turquoise",
-        "white",
-        "teal",
-        "solar",
-        "glass",
-        "wood",
-        "green",
-        "foliage"
+        "rough",
+        "metallic",
+        "glossy"
       ],
-      "warnings": [
-        "high-draw-call-count"
-      ]
+      "warnings": []
+    },
+    {
+      "file": "wind_lv1.glb",
+      "bytes": 32968,
+      "vertices": 1104,
+      "triangles": 368,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.400000095367432,
+          0,
+          -4.199999809265137
+        ],
+        "max": [
+          4.400000095367432,
+          9.747937202453613,
+          4.199999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 8.800000190734863,
+        "height": 9.747937202453613,
+        "depth": 8.399999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3295,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "wind_lv2.glb",
+      "bytes": 33988,
+      "vertices": 1140,
+      "triangles": 380,
+      "drawCalls": 2,
+      "materials": 2,
+      "pbrMaterials": 2,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.400000095367432,
+          0,
+          -4.199999809265137
+        ],
+        "max": [
+          4.400000095367432,
+          11.246211051940918,
+          4.199999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 8.800000190734863,
+        "height": 11.246211051940918,
+        "depth": 8.399999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3295,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "wind_lv3.glb",
+      "bytes": 76100,
+      "vertices": 2616,
+      "triangles": 872,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.400000095367432,
+          0,
+          -4.199999809265137
+        ],
+        "max": [
+          4.400000095367432,
+          12.213946342468262,
+          4.199999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 8.800000190734863,
+        "height": 12.213946342468262,
+        "depth": 8.399999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3295,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "wind_lv4.glb",
+      "bytes": 76116,
+      "vertices": 2616,
+      "triangles": 872,
+      "drawCalls": 3,
+      "materials": 3,
+      "pbrMaterials": 3,
+      "transformedNodes": 0,
+      "bounds": {
+        "min": [
+          -4.400000095367432,
+          0,
+          -4.199999809265137
+        ],
+        "max": [
+          4.400000095367432,
+          13.761902809143066,
+          4.199999809265137
+        ]
+      },
+      "dimensions": {
+        "width": 8.800000190734863,
+        "height": 13.761902809143066,
+        "depth": 8.399999618530273
+      },
+      "bottomCentered": true,
+      "suggestedTileScale": 0.3295,
+      "nodeNames": [
+        "asset",
+        "rough",
+        "glossy",
+        "metallic"
+      ],
+      "warnings": []
     }
   ]
 }

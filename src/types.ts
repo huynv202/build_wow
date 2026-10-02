@@ -1,4 +1,4 @@
-export type Category = 'roads' | 'transport' | 'homes' | 'commerce' | 'services' | 'utilities' | 'nature'
+export type Category = 'roads' | 'transport' | 'homes' | 'commerce' | 'services' | 'utilities' | 'nature' | 'landmarks'
 export type Tool = 'inspect' | 'bulldoze' | string
 export type Overlay = 'none' | 'power' | 'water' | 'happiness' | 'flood' | 'population' | 'medical' | 'safety' | 'protection' | 'traffic'
 export type Weather = 'Nắng đẹp' | 'Có mây' | 'Mưa' | 'Mưa lớn'
@@ -32,6 +32,48 @@ export interface BuildingDefinition {
 export type RotationStep = 0 | 1 | 2 | 3
 export interface PlacedBuilding { id: string; type: string; x: number; y: number; level: number; health: number; rotation?: RotationStep }
 export interface CityStats { money: number; population: number; housingCapacity: number; jobs: number; unemployment: number; happiness: number; power: number; powerUse: number; water: number; waterUse: number; level: number; xp: number; income: number }
+export type ResourceId = 'logs' | 'planks' | 'fish' | 'seafood' | 'food' | 'ore' | 'tools'
+export type Inventory = Record<ResourceId, number>
+export type WorkforcePriority = 0 | 1 | 2
+export interface BuildingWorkSetting { priority: WorkforcePriority; paused: boolean }
+export interface BuildingOperation {
+  buildingId: string
+  type: string
+  requiredWorkers: number
+  filledWorkers: number
+  staffing: number
+  efficiency: number
+  status: string
+  statusTone: 'good' | 'warning' | 'blocked'
+  flow: string
+  dailyRevenue: number
+  dailyCost: number
+  priority: WorkforcePriority
+  paused: boolean
+}
+export interface EconomyLedger {
+  sales: number
+  exports: number
+  householdTax: number
+  businessTax: number
+  starterGrant: number
+  wages: number
+  upkeep: number
+  policies: number
+  imports: number
+  net: number
+}
+export interface EconomyState {
+  inventory: Inventory
+  capacity: number
+  resources: { forestStock: number; forestHealth: number; fishStock: number; fishHealth: number; oreStock: number; oreHealth: number }
+  workforce: { available: number; employed: number; assignedToProduction: number; unfilled: number }
+  ledger: EconomyLedger
+  buildingOperations: Record<string, BuildingOperation>
+  buildingSettings: Record<string, BuildingWorkSetting>
+  trade: { reputation: number; completed: number; nextSequence: number; contracts: TradeContract[] }
+}
+export interface TradeContract { id: string; title: string; description: string; requirements: Partial<Inventory>; reward: number; reputation: number }
 export interface CityDynamics {
   groups: { families: number; workers: number; students: number; elderly: number; tourists: number }
   services: { health: number; education: number; safety: number; mobility: number; resilience: number; defense: number }
@@ -60,4 +102,5 @@ export interface GameState {
   disaster: Disaster | null
   dynamics: CityDynamics
   progress: GameProgress
+  economy: EconomyState
 }
